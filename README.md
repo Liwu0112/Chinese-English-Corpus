@@ -6,7 +6,7 @@
 
 ### 需求分析
 
-
+![](C:\Users\Xiao-Li\Desktop\e0fd7ca9d7da7bea5f6558a056658ef.png)
 
 ### 数据库设计
 
