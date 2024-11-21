@@ -3,11 +3,12 @@ package com.example.dto;
 /**
  * @author liwu
  * @version 1.0
- * @date 2024/11/21
- * @注释：共同模块中登录功能DTO
- * 接收前端传递的userName和passWord
+ * @date 2024/11/22
+ * @注释：普通用户注册DTO
+ * 接收前端所传递的普通用户注册时的参数
+ * 参数内容为用户名和密码
  */
-public class LoginDto {
+public class RegularUserEnroll {
     private String userName;
     private String passWord;
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 1.0
  * @date 2024/11/21
  * @注释：
- * 该模块为普通用户和管理员的共同功能模块
+ * 相同模块控制类
  * 功能1 用户登录功能
  * 功能2 用户注销登录功能
  */
@@ -28,14 +28,14 @@ public class CommonController extends BaseApiService {
     //用户登录功能
     @PostMapping("/login")
     public BaseResponse userLogin(@RequestBody LoginDto loginDto){
-        String userName = loginDto.getUserName();
-        String passWord = loginDto.getPassWord();
-        User user = commonService.userLogin(userName,passWord);
+        String userName = loginDto.getUserName();  //获取前端传递用户名
+        String passWord = loginDto.getPassWord();  //获取前端传递密码
+        User user = commonService.userLogin(userName,passWord); //调用登录方法
         if (user!=null){
-            Object role = user.getRole();
+            Object role = user.getRole(); //获取用户类型
             return setResult(200,"登录成功！",role);
         }else {
-            return setResultError();
+            return setResultError(); //为空，返回状态码为500
         }
     }
 }

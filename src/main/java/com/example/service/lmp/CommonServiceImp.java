@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @author liwu
  * @version 1.0
  * @date 2024/11/21
- * @注释：
+ * @注释：共同模块功能实现类
  */
 @Service
 public class CommonServiceImp implements CommonService {
@@ -20,11 +20,11 @@ public class CommonServiceImp implements CommonService {
     private UserMapper userMapper;
     @Override
     public User userLogin(String userName, String passWord) {
-        MD5Utils md5Utils = new MD5Utils();
+        MD5Utils md5Utils = new MD5Utils(); //md5加密算法
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        String dbPassWord = md5Utils.md5(passWord);
-        queryWrapper.eq("username",userName).eq("passWord",dbPassWord);
-        User user = userMapper.selectOne(queryWrapper);
+        String dbPassWord = md5Utils.md5(passWord); //使用md5加密算法对前端传递的密码加密
+        queryWrapper.eq("username",userName).eq("passWord",dbPassWord); //包装实例
+        User user = userMapper.selectOne(queryWrapper); //查询库中是否有该用户
         return user;
     }
 }

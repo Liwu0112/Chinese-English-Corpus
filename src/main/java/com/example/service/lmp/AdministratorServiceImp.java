@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
  * @author liwu
  * @version 1.0
  * @date 2024/11/21
- * @注释：
+ * @注释：管理员功能实现类
  */
 @Service
 public class AdministratorServiceImp implements AdministratorService {
