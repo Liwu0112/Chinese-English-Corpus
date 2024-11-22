@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 public class CommonServiceImp implements CommonService {
     @Autowired
     private UserMapper userMapper;
+
+    //用户登录
     @Override
     public User userLogin(String userName, String passWord) {
         MD5Utils md5Utils = new MD5Utils(); //md5加密算法
@@ -27,4 +29,17 @@ public class CommonServiceImp implements CommonService {
         User user = userMapper.selectOne(queryWrapper); //查询库中是否有该用户
         return user;
     }
+
+    //拦截器
+    @Override
+    public boolean userInter(String userName) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username",userName);
+        User user =userMapper.selectOne(queryWrapper);
+        return user!=null;
+    }
+
+
+    //用户退出
+
 }

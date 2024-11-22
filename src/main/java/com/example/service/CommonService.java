@@ -11,5 +11,8 @@ import com.example.entity.User;
 public interface CommonService {
 
     //用户登录
-    User userLogin(String userName,String passWord);
+    User userLogin(String userName, String passWord);
+
+    //拦截器实现
+    boolean userInter(String userName);
 }
