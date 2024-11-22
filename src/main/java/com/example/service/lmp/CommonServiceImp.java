@@ -23,7 +23,7 @@ public class CommonServiceImp implements CommonService {
         MD5Utils md5Utils = new MD5Utils(); //md5加密算法
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         String dbPassWord = md5Utils.md5(passWord); //使用md5加密算法对前端传递的密码加密
-        queryWrapper.eq("username",userName).eq("passWord",dbPassWord); //包装实例
+        queryWrapper.eq("username",userName).eq("password",dbPassWord); //包装实例
         User user = userMapper.selectOne(queryWrapper); //查询库中是否有该用户
         return user;
     }

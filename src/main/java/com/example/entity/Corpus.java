@@ -1,39 +1,46 @@
 package com.example.entity;
-import java.io.Serializable;
-import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * 
  * @TableName t_corpus
  */
-@TableName("t_corpus")
+@TableName(value ="t_corpus")
 @Data
 public class Corpus implements Serializable {
     /**
      * 
      */
-    private Integer corpus_id;
+    @TableId(type = IdType.AUTO)
+    private Integer corpusId;
 
     /**
      * 
      */
-    private String chinese_text;
+    private String chineseText;
 
     /**
      * 
      */
-    private String english_text;
+    private String englishText;
 
     /**
      * 
      */
-    private Integer type_id;
+    private Integer typeId;
 
     /**
      * 
      */
-    private Integer corpus_status;
+    private Integer corpusStatus;
 
     /**
      * 
@@ -43,7 +50,8 @@ public class Corpus implements Serializable {
     /**
      * 
      */
-    private Date creation_time;
+    private Date creationTime;
 
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

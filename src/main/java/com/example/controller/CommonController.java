@@ -32,8 +32,7 @@ public class CommonController extends BaseApiService {
         String passWord = loginDto.getPassWord();  //获取前端传递密码
         User user = commonService.userLogin(userName,passWord); //调用登录方法
         if (user!=null){
-            Object role = user.getRole(); //获取用户类型
-            return setResult(200,"登录成功！",role);
+           return setResultSuccessData(user); //返回状态码为200，返回值为库中该用户数据
         }else {
             return setResultError(); //为空，返回状态码为500
         }

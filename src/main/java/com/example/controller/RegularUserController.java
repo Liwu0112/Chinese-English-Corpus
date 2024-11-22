@@ -28,10 +28,6 @@ public class RegularUserController extends BaseApiService {
         String userName = regularUserEnroll.getUserName(); //获取注册时前端传递的用户名和密码
         String passWord = regularUserEnroll.getPassWord();
         int a = regularUserService.regularuserEnroll(userName,passWord); //调用注册方法
-        if (a!=0){
-            return setResultDb(a); //不为零，注册成功，返回状态码为200
-        }else {
-            return setResultError("该用户已存在，请重新注册");
-        }
+        return setResultDb(a); //返回状态码为200，注册成功；返回状态码为500，注册失败，该用户已经注册
     }
 }
