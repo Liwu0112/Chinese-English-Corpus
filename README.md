@@ -151,6 +151,42 @@
 }
 ```
 
+#### 普通用户中文翻译为英文
+
+接口描述：输入语料中文，返回语料英文
+
+请求方式：POST
+
+请求地址：/regularuser/translationch
+
+请求参数：/regularuser/translationch/请求参数
+
+响应成功参数
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": [
+        {
+            "englishText": "EmergencyShelter"
+        }
+    ]
+}
+```
+
+响应失败参数
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
+}
+```
+
+
+
 ### 管理员控制类
 
 ## 代码结构

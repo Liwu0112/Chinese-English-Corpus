@@ -22,4 +22,26 @@ public class AdministratorController extends BaseApiService {
     @Autowired
     private AdministratorService administratorService;
 
+    //查看所有用户
+
+    //重置用户密码
+
+    //修改用户权限
+
+    //新增用户
+
+    //删除用户
+
+    //新增分类
+
+    //新增语料
+
+    //修改语料
+
+    //删除语料
+
+    //查看所有语料
+
+    //分类查看语料
+
 }

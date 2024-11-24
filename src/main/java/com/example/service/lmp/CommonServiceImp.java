@@ -34,12 +34,9 @@ public class CommonServiceImp implements CommonService {
     @Override
     public boolean userInter(String userName) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username",userName);
+        queryWrapper.eq("username",userName); //查找数据库中是否有该数据
         User user =userMapper.selectOne(queryWrapper);
         return user!=null;
     }
-
-
-    //用户退出
 
 }

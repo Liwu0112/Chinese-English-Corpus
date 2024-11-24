@@ -40,7 +40,7 @@ public class Corpus implements Serializable {
     /**
      * 
      */
-    private Integer corpusStatus;
+    private Object corpusStatus;
 
     /**
      * 

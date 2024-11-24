@@ -6,6 +6,7 @@ import com.example.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 
 /**
 * @author Xiao-Li
@@ -15,6 +16,7 @@ import org.apache.ibatis.annotations.Results;
 */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
+
 }
 
 

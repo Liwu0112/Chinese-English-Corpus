@@ -13,12 +13,15 @@ import javax.servlet.http.HttpServletResponse;
  * @author liwu
  * @version 1.0
  * @date 2024/11/22
- * @注释：该类为拦截器，主要作用为通过检验Cookie对用户进行鉴权
+ * @注释：该类为拦截器，主要作用为通过检验Cookie对用户进行鉴权以及删除cookie方法
  */
 @Component
 public class CookieInterceptor  implements HandlerInterceptor {
     @Autowired
     private CommonService commonService;
+
+
+    //判断cookie是否有效
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Cookie[] cookies = request.getCookies();
@@ -37,6 +40,9 @@ public class CookieInterceptor  implements HandlerInterceptor {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "未授权访问");
         return false;
     }
+
+
+    //删除cookie方法
     public void deleteCookie(HttpServletResponse response, String cookieName) {
         Cookie cookie = new Cookie(cookieName, "");
         cookie.setMaxAge(0);

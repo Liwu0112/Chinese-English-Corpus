@@ -1,12 +1,18 @@
 package com.example.service.lmp;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.dto.ChToEnDto;
+import com.example.entity.Corpus;
 import com.example.entity.User;
+import com.example.mapper.CorpusMapper;
 import com.example.mapper.UserMapper;
 import com.example.service.RegularUserService;
 import com.example.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.sound.midi.Soundbank;
+import java.util.List;
 
 /**
  * @author liwu
@@ -19,6 +25,9 @@ public class RegularUserServiceImp implements RegularUserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CorpusMapper corpusMapper;
+    //普通用户注册
     @Override
     public int regularuserEnroll(String userName, String passWord) {
         QueryWrapper<User> queryWrapper =new QueryWrapper<>();
@@ -36,4 +45,13 @@ public class RegularUserServiceImp implements RegularUserService {
             return 0; //不为空，返回0
         }
     }
+
+    //中译英
+    @Override
+    public List<ChToEnDto> chToEn(String text) {
+        String likeText = "%" + text + "%";  //模糊查询需要拼接
+        return corpusMapper.selectEnglishTextChToEnDtos(likeText);  //返回对应数据
+    }
+
+
 }

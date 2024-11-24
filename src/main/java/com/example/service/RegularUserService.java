@@ -1,5 +1,10 @@
 package com.example.service;
 
+import com.example.dto.ChToEnDto;
+import com.example.entity.Corpus;
+
+import java.util.List;
+
 /**
  * @author liwu
  * @version 1.0
@@ -9,4 +14,7 @@ package com.example.service;
 public interface RegularUserService {
     //普通用户注册
     int regularuserEnroll(String userName,String passWord);
+
+    //中译英
+    List<ChToEnDto> chToEn(String text);
 }

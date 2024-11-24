@@ -8,11 +8,8 @@ import com.example.utils.api.BaseApiService;
 import com.example.utils.api.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 /**
  * @author liwu
  * @version 1.0
@@ -49,7 +46,7 @@ public class CommonController extends BaseApiService {
         }
     }
 
-    //用户退出
+    //用户注销登录
     @GetMapping("/logout")
     public BaseResponse usersLogout(HttpServletResponse response) {
         // 调用拦截器中的方法删除Cookie
