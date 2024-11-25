@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.dto.LoginDto;
+import com.example.dto.UpdateUserNameDto;
 import com.example.entity.User;
 import com.example.service.CommonService;
 import com.example.utils.CookieInterceptor;
@@ -36,7 +37,7 @@ public class CommonController extends BaseApiService {
         String passWord = loginDto.getPassWord();  //获取前端传递密码
         User user = commonService.userLogin(userName,passWord); //调用登录方法
         if (user!=null){
-            Cookie cookie = new Cookie("cookieName",String.valueOf(user.getUsername())); //生成一个包含user_id的Cookie
+            Cookie cookie = new Cookie("cookieName",String.valueOf(user.getUserName()   )); //生成一个包含user_id的Cookie
             cookie.setPath("/");  //可全局访问该Cookie
             cookie.setMaxAge(3600); //有效时间一小时
             response.addCookie(cookie);
@@ -44,6 +45,15 @@ public class CommonController extends BaseApiService {
         }else {
             return setResultError(); //为空，返回状态码为500
         }
+    }
+
+    //修改用户名
+    @PostMapping("/updateusername")
+    public BaseResponse userUpdateName(@RequestBody UpdateUserNameDto updateUserNameDto) {
+        String userName = updateUserNameDto.getUserName();
+        String userNewName = updateUserNameDto.getUserNewName();
+        int a = commonService.updateUserName(userName,userNewName);
+        return setResultDb(a);
     }
 
     //用户注销登录

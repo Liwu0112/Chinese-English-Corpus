@@ -33,17 +33,26 @@
 | 语料标识     | corpus_id     | int       | 是       | 是       | 否       | 自增长整数类型，作为主键                   |
 | 中文文本     | chinese_text  | text      | 否       | 否       | 否       | 中文文本内容                               |
 | 英文文本     | english_text  | text      | 否       | 否       | 否       | 英文文本内容                               |
-| 种类标识     | type_id       | int       | 否       | 否       | 是       | 语料种类标识，通过该值查询种类名称         |
+| 领域标识     | kind_id       | int       | 否       | 否       | 是       | 语料所属领域标识                           |
+| 种类标识     | type_id       | int       | 否       | 否       | 是       | 语料所属种类标识，通过该值查询种类名称     |
 | 语料状态     | corpus_status | tinyint   | 否       | 否       | 否       | 通过该值判断语料是否状态，0为下线，1为上线 |
 | 语料创建者   | creator       | varchar   | 否       | 否       | 否       | 语料创建者                                 |
 | 语料创建时间 | creation_time | Timestamp | 否       | 否       | 否       | 语料创建时间                               |
 
-### 种类表：t_type
+### 分类表：t_type
 
 | 字段CH   | 字段EN    | 数据类型 | 是否唯一 | 是否主键 | 是否外键 | 描述                         |
 | -------- | --------- | -------- | -------- | -------- | -------- | ---------------------------- |
 | 种类标识 | type_id   | int      | 是       | 是       | 否       | 自增长整型数据类型，作为主键 |
+| 领域标识 | kind_id   | int      | 否       | 否       | 是       | 种类所属领域                 |
 | 种类名称 | type_name | varchar  | 是       | 否       | 否       | 种类名称，例如公共交通       |
+
+### 种类表：t_kind
+
+| 字段CH   | 字段EN    | 数据类型 | 是否唯一 | 是否主键 | 是否外键 | 描述           |
+| -------- | --------- | -------- | -------- | -------- | -------- | -------------- |
+| 领域标识 | kind_id   | int      | 是       | 是       | 否       | 领域标识，自增 |
+| 领域名称 | kind_name | varchar  | 是       | 否       | 否       | 领域名称       |
 
 ## 接口说明
 
@@ -159,9 +168,9 @@
 
 请求地址：/regularuser/translationch
 
-请求参数：/regularuser/translationch/请求参数
+请求参数：/regularuser/translationch?text=
 
-响应成功参数
+响应成功参数：
 
 ```json
 {
@@ -169,13 +178,16 @@
     "msg": "ok",
     "data": [
         {
-            "englishText": "EmergencyShelter"
+            "chineseText": "保安室；门卫室;值班岗",
+            "englishText": "Security 或Security Booth/Guard/Office/Room",
+            "kindName": "通则",
+            "typeName": "安全保卫、消防类"
         }
     ]
 }
 ```
 
-响应失败参数
+响应失败参数：
 
 ```json
 {
@@ -185,7 +197,42 @@
 }
 ```
 
+普通用户英文翻译为中文
 
+接口描述：输入语料英文，返回语料中文，英文，所属领域，种类
+
+请求方式：POST
+
+请求地址：/regularuser/translationch
+
+请求参数：/regularuser/translationen?text=
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": [
+        {
+            "chineseText": "保安室；门卫室;值班岗",
+            "englishText": "Security 或Security Booth/Guard/Office/Room",
+            "kindName": "通则",
+            "typeName": "安全保卫、消防类"
+        }
+    ]
+}
+```
+
+响应失败参数：
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
+}
+```
 
 ### 管理员控制类
 

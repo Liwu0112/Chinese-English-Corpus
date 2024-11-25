@@ -20,12 +20,15 @@ public class Type implements Serializable {
      */
     @TableId(type = IdType.AUTO)
     private Integer typeId;
+    /**
+     * 
+     */
+    private Integer kindId;
 
     /**
      * 
      */
     private String typeName;
-
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

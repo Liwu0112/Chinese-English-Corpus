@@ -1,8 +1,6 @@
 package com.example.service;
 
-import com.example.dto.ChToEnDto;
-import com.example.entity.Corpus;
-
+import com.example.dto.TransTextDto;
 import java.util.List;
 
 /**
@@ -15,6 +13,9 @@ public interface RegularUserService {
     //普通用户注册
     int regularuserEnroll(String userName,String passWord);
 
-    //中译英
-    List<ChToEnDto> chToEn(String text);
+    //使用中文语料查询英文语料
+    List<TransTextDto> chToEn(String text);
+
+    //使用英文语料查询中文语料
+    List<TransTextDto> enToCh(String text);
 }

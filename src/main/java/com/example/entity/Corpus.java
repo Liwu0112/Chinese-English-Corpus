@@ -35,6 +35,11 @@ public class Corpus implements Serializable {
     /**
      * 
      */
+    private Integer kindId;
+
+    /**
+     * 
+     */
     private Integer typeId;
 
     /**
