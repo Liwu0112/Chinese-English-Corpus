@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * 功能2 用户注销登录功能
  */
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
 @ResponseBody
 @RequestMapping("/common")
 public class CommonController extends BaseApiService {

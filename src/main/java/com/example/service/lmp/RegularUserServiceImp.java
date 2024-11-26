@@ -45,18 +45,11 @@ public class RegularUserServiceImp implements RegularUserService {
         }
     }
 
-    //使用中文语料查询英文语料
+    //使用前端传递的语料段查询语料
     @Override
-    public List<TransTextDto> chToEn(String text) {
+    public List<TransTextDto> chAndEn(String text) {
         String likeText = "%" + text + "%";  //模糊查询需要拼接
-        return corpusMapper.selectEnglishTextChToEnDtos(likeText);  //返回对应数据
-    }
-
-    //使用英文语料查询中文语料
-    @Override
-    public List<TransTextDto> enToCh(String text) {
-        String likeText = "%" + text + "%";  //模糊查询需要拼接
-        return corpusMapper.selectChineseTextEnToChDtos(likeText);  //返回对应数据
+        return corpusMapper.selectChinesAndEnglish(likeText);  //返回对应数据
     }
 
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @注释：管理员控制模块
  */
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
 @ResponseBody
 @RequestMapping("/admin")
 public class AdministratorController extends BaseApiService {

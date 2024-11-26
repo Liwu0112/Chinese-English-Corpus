@@ -160,52 +160,15 @@
 }
 ```
 
-#### 普通用户中文翻译为英文
+#### 普通用户中英字段查询语料
 
 接口描述：输入语料中文，返回语料英文
 
 请求方式：POST
 
-请求地址：/regularuser/translationch
+请求地址：/regularuser/translationbytext
 
-请求参数：/regularuser/translationch?text=
-
-响应成功参数：
-
-```json
-{
-    "code": 200,
-    "msg": "ok",
-    "data": [
-        {
-            "chineseText": "保安室；门卫室;值班岗",
-            "englishText": "Security 或Security Booth/Guard/Office/Room",
-            "kindName": "通则",
-            "typeName": "安全保卫、消防类"
-        }
-    ]
-}
-```
-
-响应失败参数：
-
-```json
-{
-    "code": 500,
-    "msg": "fail",
-    "data": null
-}
-```
-
-普通用户英文翻译为中文
-
-接口描述：输入语料英文，返回语料中文，英文，所属领域，种类
-
-请求方式：POST
-
-请求地址：/regularuser/translationch
-
-请求参数：/regularuser/translationen?text=
+请求参数：/regularuser/translationbytext?text=
 
 响应成功参数：
 

@@ -13,9 +13,6 @@ public interface RegularUserService {
     //普通用户注册
     int regularuserEnroll(String userName,String passWord);
 
-    //使用中文语料查询英文语料
-    List<TransTextDto> chToEn(String text);
-
-    //使用英文语料查询中文语料
-    List<TransTextDto> enToCh(String text);
+    //使用前端传递的语料段查询语料
+    List<TransTextDto> chAndEn(String text);
 }
