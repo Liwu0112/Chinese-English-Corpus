@@ -8,6 +8,8 @@ import com.example.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 /**
  * @author liwu
  * @version 1.0
@@ -39,6 +41,19 @@ public class CommonServiceImp implements CommonService {
         if (user == null){  //不存在执行修改语句
             return userMapper.updateUsername(userName,userNewName);
         }else {
+            return 0;
+        }
+    }
+
+    @Override
+    public int updateUserPassword(String userName, String userNewPassword) {
+        MD5Utils md5Utils =new MD5Utils();
+        String md5Password = md5Utils.md5(userNewPassword); //将用户旧密码加密
+        String dbPassword = userMapper.selectUserPassword(userName); //查找用户在数据库中密码
+        if (!Objects.equals(md5Password, dbPassword)){
+            return userMapper.updateUserPassword(userName,md5Password);
+        }
+        else {
             return 0;
         }
     }

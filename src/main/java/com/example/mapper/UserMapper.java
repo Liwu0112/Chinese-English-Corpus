@@ -16,6 +16,14 @@ public interface UserMapper extends BaseMapper<User> {
     //修改用户名
     @Update("update t_user set user_name=#{userNewName} where user_name = #{userName}")
     int updateUsername(@Param("userName") String userName,@Param("userNewName") String userNewName);
+
+    //查询用户名对应的密码
+    @Select("select password from t_user where user_name=#{userName}")
+    String selectUserPassword(@Param("userName")String userName);
+
+    //修改用户密码
+    @Update("update t_user set password=#{userNewPassword} where user_name=#{userName}")
+    int updateUserPassword(@Param("userName")String userName,@Param("userNewPassword")String userNewPassword);
 }
 
 

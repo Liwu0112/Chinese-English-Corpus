@@ -16,6 +16,10 @@ public interface CommonService {
     //修改用户名
     int updateUserName(String userName,String userNewName);
 
+    //修改用户密码
+    int updateUserPassword(String userName,String userNewPassword);
+
     //拦截器实现
     boolean userInter(String userName);
+
 }
