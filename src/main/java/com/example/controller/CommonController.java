@@ -8,7 +8,6 @@ import com.example.service.CommonService;
 import com.example.utils.CookieInterceptor;
 import com.example.utils.api.BaseApiService;
 import com.example.utils.api.BaseResponse;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
@@ -23,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
  * 功能2 用户注销登录功能
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
 @ResponseBody
 @RequestMapping("/common")
 public class CommonController extends BaseApiService {

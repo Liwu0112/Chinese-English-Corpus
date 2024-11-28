@@ -24,19 +24,26 @@ public class CookieInterceptor  implements HandlerInterceptor {
     //判断cookie是否有效
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // 对 OPTIONS 请求放行
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK); // 返回 200 OK
+            return true; // 放行
+        }
+
+        // 检查请求中的 Cookie
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("cookieName".equals(cookie.getName())) {
-                    // 在这里可以进行更复杂的验证逻辑，比如根据用户ID查询数据库验证用户是否存在等
+                    // 验证 Cookie 值
                     String userName = cookie.getValue();
-                    // 假设你有一个UserService来验证用户ID是否有效
                     if (commonService.userInter(userName)) {
-                        return true;
+                        return true; // 验证成功，放行
                     }
                 }
             }
         }
+        // 如果验证失败，返回 401 Unauthorized
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "未授权访问");
         return false;
     }

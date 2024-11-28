@@ -58,7 +58,7 @@
 
 ### 公共功能控制类
 
-#### 用户登录接口
+#### 用户登录
 
 接口描述：该接口的作用为实现管理员和普通用户的登录功能，并生成Cookie
 
@@ -101,7 +101,7 @@
 }
 ```
 
-#### 用户退出接口
+#### 用户退出
 
 接口描述：该接口用于用户的退出，退出同时删除Cookie
 
@@ -119,11 +119,85 @@
 }
 ```
 
-相应失败参数：响应失败返回状态码为401
+响应失败参数：响应失败返回状态码为401
+
+#### 修改用户名
+
+接口描述：使用该接口可以修改用户名
+
+请求方式：POST
+
+请求地址：/common/updateusername
+
+请求参数：
+
+```json
+{
+    "userName":"user1",
+    "userNewName":"cjs"
+}
+```
+
+响应成功返回参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": null
+}
+```
+
+响应失败参数：
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
+}
+```
+
+#### 修改密码
+
+接口描述：使用该接口可以修改用户名
+
+请求方式：POST
+
+请求地址：/common/updatepassword
+
+请求参数：
+
+```json
+{
+    "userName": "lys",
+    "userNewPassword": "12345678"
+}
+```
+
+响应成功返回参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": null
+}
+```
+
+响应失败参数：
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
+}
+```
 
 ### 普通用户控制类
 
-#### 普通用户注册接口
+#### 普通用户注册
 
 接口描述：该接口的作用为实现管理员和普通用户的登录功能
 
@@ -180,6 +254,129 @@
         {
             "chineseText": "保安室；门卫室;值班岗",
             "englishText": "Security 或Security Booth/Guard/Office/Room",
+            "kindName": "通则",
+            "typeName": "安全保卫、消防类"
+        }
+    ]
+}
+```
+
+响应失败参数：
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
+}
+```
+
+#### 查看所有种类名
+
+接口描述：用于查看所有种类名（kind_name)
+
+请求方式：POST
+
+请求地址：/regularuser/selectallkindname
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": [
+        {
+            "kindName": "通则"
+        },
+        {
+            "kindName": "交通"
+        },
+        {
+            "kindName": "旅游"
+        },
+        {
+            "kindName": "文化娱乐"
+        },
+        {
+            "kindName": "体育"
+        },
+        {
+            "kindName": "教育"
+        },
+        {
+            "kindName": "医疗卫生"
+        },
+        {
+            "kindName": "邮政电信"
+        },
+        {
+            "kindName": "餐饮住宿"
+        },
+        {
+            "kindName": "商业金融"
+        }
+    ]
+}
+```
+
+#### 通过种类名查看种类下所有分类
+
+接口描述：用于查看所有种类下的所有分类（type_name）
+
+请求方式：POST
+
+请求地址：/regularuser/selecttnbykn
+
+请求参数：/regularuser/selecttnbykn?kindName=
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": [
+        {
+            "typeName": "安全保卫、消防类"
+        }
+    ]
+}
+```
+
+#### 查看分类下的所有语料
+
+接口描述：所属当前种类的分类的所有语料
+
+请求方式：POST
+
+请求地址：/regularuser/selecttypecorpus
+
+请求参数：
+
+```json
+{
+    "kindName":"通则",
+    "typeName":"安全保卫、消防类"
+}
+```
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": [
+        {
+            "chineseText": "保安室；门卫室;值班岗",
+            "englishText": "Security 或Security Booth/Guard/Office/Room",
+            "kindName": "通则",
+            "typeName": "安全保卫、消防类"
+        },
+        {
+            "chineseText": "110",
+            "englishText": "110",
             "kindName": "通则",
             "typeName": "安全保卫、消防类"
         }

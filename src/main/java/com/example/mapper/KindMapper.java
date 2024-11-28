@@ -1,8 +1,13 @@
 package com.example.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.dto.SelectAllKindName;
 import com.example.entity.Kind;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @author Xiao-Li
@@ -11,4 +16,12 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface KindMapper extends BaseMapper<Kind> {
+
+    //查询所有种类名
+    @Select("select kind_name from t_kind ")
+    List<SelectAllKindName> selectAllKindName();
+
+    //通过kind_name查询kind_id
+    @Select("select kind_id from t_kind where kind_name=#{kindName}")
+    Integer selectKindIdByKindNameInteger(@Param("kindName")String kindName);
 }

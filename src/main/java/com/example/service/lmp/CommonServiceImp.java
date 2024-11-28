@@ -7,7 +7,6 @@ import com.example.service.CommonService;
 import com.example.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Objects;
 
 /**
@@ -45,6 +44,7 @@ public class CommonServiceImp implements CommonService {
         }
     }
 
+    //修改密码
     @Override
     public int updateUserPassword(String userName, String userNewPassword) {
         MD5Utils md5Utils =new MD5Utils();
@@ -57,7 +57,6 @@ public class CommonServiceImp implements CommonService {
             return 0;
         }
     }
-
 
     //拦截器
     @Override

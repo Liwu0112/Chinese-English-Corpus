@@ -1,9 +1,14 @@
 package com.example.service.lmp;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.dto.TransTextDto;
+import com.example.dto.SelectAllKindName;
+import com.example.dto.SelectTypeCorpus;
+import com.example.dto.SelectTypeNames;
+import com.example.dto.CorpusDto;
 import com.example.entity.User;
 import com.example.mapper.CorpusMapper;
+import com.example.mapper.KindMapper;
+import com.example.mapper.TypeMapper;
 import com.example.mapper.UserMapper;
 import com.example.service.RegularUserService;
 import com.example.utils.MD5Utils;
@@ -25,7 +30,10 @@ public class RegularUserServiceImp implements RegularUserService {
     private UserMapper userMapper;
     @Autowired
     private CorpusMapper corpusMapper;
-
+    @Autowired
+    private KindMapper kindMapper;
+    @Autowired
+    private TypeMapper typeMapper;
     //普通用户注册
     @Override
     public int regularuserEnroll(String userName, String passWord) {
@@ -47,9 +55,30 @@ public class RegularUserServiceImp implements RegularUserService {
 
     //使用前端传递的语料段查询语料
     @Override
-    public List<TransTextDto> chAndEn(String text) {
+    public List<CorpusDto> chAndEn(String text) {
         String likeText = "%" + text + "%";  //模糊查询需要拼接
         return corpusMapper.selectChinesAndEnglish(likeText);  //返回对应数据
+    }
+
+    //查询所有种类（kind）名
+    @Override
+    public List<SelectAllKindName> selectKindName(){
+        return kindMapper.selectAllKindName();
+    }
+
+    //通过种类名产看种类名下的所有分类
+    @Override
+    public List<SelectTypeNames>  selectTypeNames(String kindName){
+        Integer kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+        return typeMapper.selectTypeNamesByKId(kindId);
+    }
+
+    //分类查询
+    @Override
+    public List<CorpusDto> selectTypeCorpus(String kindName, String typeName) {
+        Integer kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+        Integer typeId = typeMapper.selectTypeIdInteger(typeName);
+        return corpusMapper.typeSelect(kindId,typeId);
     }
 
 
