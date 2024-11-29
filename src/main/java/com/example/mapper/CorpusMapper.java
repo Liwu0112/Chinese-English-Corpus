@@ -26,6 +26,13 @@ public interface CorpusMapper extends BaseMapper<Corpus> {
     @Select(" SELECT c.chinese_text, c.english_text, k.kind_name, t.type_name FROM t_corpus c JOIN t_kind k ON c.kind_id = k.kind_id JOIN t_type t ON c.type_id = t.type_id WHERE c.kind_id =#{kindId} AND c.type_id =#{typeId} and c.corpus_status='1'")
     List<CorpusDto> typeSelect(@Param("kindId") Integer kindId,@Param("typeId") Integer typeId);
 
+    //查看库中所有状态为上线(corpus_status=1)的语料总数
+    @Select("select count(1) from t_corpus where corpus_status='1'")
+    Integer countCorpusStatusOne();
+
+    //查看库中种类所属的语料总数且状态为上线(corpus_status=1)
+    @Select("select count(1) from t_corpus where kind_id=#{kind_id}")
+    Integer kindCountCors(@Param("kind_id")Integer kindId);
 }
 
 

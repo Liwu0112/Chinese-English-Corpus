@@ -24,4 +24,8 @@ public interface KindMapper extends BaseMapper<Kind> {
     //通过kind_name查询kind_id
     @Select("select kind_id from t_kind where kind_name=#{kindName}")
     Integer selectKindIdByKindNameInteger(@Param("kindName")String kindName);
+
+    //查看种类总数（t_kind)
+    @Select("select count(1) from t_kind")
+    Integer countKind();
 }

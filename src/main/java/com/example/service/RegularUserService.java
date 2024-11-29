@@ -24,6 +24,18 @@ public interface RegularUserService {
 
     //通过种类名产看种类名下的所有分类
     List<SelectTypeNames> selectTypeNames(String kindName);
+
     //分类查询语料
     List<CorpusDto> selectTypeCorpus(String kindName,String typeName);
+
+    //查看库中所有状态为上线(corpus_status=1)的语料总数
+    int selectCountCorpusone();
+    //查看种类总数（t_kind)
+    int selectCountKind();
+
+    //查看分类总数（t_type)
+    int selectCountType();
+
+    //查看库中种类所属的语料总数且状态为上线(corpus_status=1)
+    int kindToCorpus(String kindName);
 }

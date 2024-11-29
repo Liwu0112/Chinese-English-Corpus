@@ -60,8 +60,6 @@
 
 #### 用户登录
 
-接口描述：该接口的作用为实现管理员和普通用户的登录功能，并生成Cookie
-
 请求方式：POST
 
 请求地址：/common/login
@@ -103,8 +101,6 @@
 
 #### 用户退出
 
-接口描述：该接口用于用户的退出，退出同时删除Cookie
-
 请求方式：GET
 
 请求地址：/common/logout
@@ -122,8 +118,6 @@
 响应失败参数：响应失败返回状态码为401
 
 #### 修改用户名
-
-接口描述：使用该接口可以修改用户名
 
 请求方式：POST
 
@@ -159,8 +153,6 @@
 ```
 
 #### 修改密码
-
-接口描述：使用该接口可以修改用户名
 
 请求方式：POST
 
@@ -199,8 +191,6 @@
 
 #### 普通用户注册
 
-接口描述：该接口的作用为实现管理员和普通用户的登录功能
-
 请求方式：POST
 
 请求地址：/regularuser/enroll
@@ -236,8 +226,6 @@
 
 #### 普通用户中英字段查询语料
 
-接口描述：输入语料中文，返回语料英文
-
 请求方式：POST
 
 请求地址：/regularuser/translationbytext
@@ -272,8 +260,6 @@
 ```
 
 #### 查看所有种类名
-
-接口描述：用于查看所有种类名（kind_name)
 
 请求方式：POST
 
@@ -322,8 +308,6 @@
 
 #### 通过种类名查看种类下所有分类
 
-接口描述：用于查看所有种类下的所有分类（type_name）
-
 请求方式：POST
 
 请求地址：/regularuser/selecttnbykn
@@ -345,8 +329,6 @@
 ```
 
 #### 查看分类下的所有语料
-
-接口描述：所属当前种类的分类的所有语料
 
 请求方式：POST
 
@@ -391,6 +373,72 @@
     "code": 500,
     "msg": "fail",
     "data": null
+}
+```
+
+#### 查看库中所有状态为上线（corpus_status=1)的语料总数
+
+请求方式：GET
+
+请求地址：/regularuser/reselectcountcorpus
+
+返回参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 14
+}
+```
+
+#### 查看种类总数
+
+请求方式：GET
+
+请求地址：/regularuser/reselectcountkind
+
+返回参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 10
+}
+```
+
+#### 查看分类总数
+
+请求方式：GET
+
+请求地址：/regularuser/reselectcounttype
+
+返回参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 2
+}
+```
+
+#### 查看库中种类所属的语料总数且状态为上线(corpus_status=1)
+
+请求方式：POST
+
+请求地址：/regularuser/rescorpusbykindname
+
+请求参数：/regularuser/rescorpusbykindname?kindName=
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 13
 }
 ```
 

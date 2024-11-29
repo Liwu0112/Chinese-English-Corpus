@@ -81,5 +81,28 @@ public class RegularUserServiceImp implements RegularUserService {
         return corpusMapper.typeSelect(kindId,typeId);
     }
 
+    //查看库中所有状态为上线(corpus_status=1)的语料总数
+    @Override
+    public int selectCountCorpusone() {
+        return corpusMapper.countCorpusStatusOne();
+    }
 
+    //查看种类总数（t_kind)
+    @Override
+    public int selectCountKind() {
+        return kindMapper.countKind();
+    }
+
+    //查看分类总数（t_type)
+    @Override
+    public int selectCountType() {
+        return typeMapper.countType();
+    }
+
+    //查看库中种类所属的语料总数且状态为上线(corpus_status=1)
+    @Override
+    public int kindToCorpus(String kindName) {
+        Integer kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+        return corpusMapper.kindCountCors(kindId);
+    }
 }
