@@ -16,9 +16,11 @@ import java.util.List;
 @Mapper
 public interface CorpusMapper extends BaseMapper<Corpus> {
 
-    /*使用前端传递的语料段查询语料
-    使用模糊查询
-     */
+
+
+    //普通用户
+
+    //使用前端传递的语料段查询语料
     @Select(" SELECT c.chinese_text, c.english_text, k.kind_name, t.type_name FROM t_corpus c LEFT JOIN t_type t ON c.type_id = t.type_id LEFT JOIN t_kind k ON c.kind_id = k.kind_id WHERE c.chinese_text LIKE #{text} or c.english_text like #{text} and c.corpus_status='1'")
     List<CorpusDto> selectChinesAndEnglish(@Param("text") String text);
 
@@ -33,6 +35,20 @@ public interface CorpusMapper extends BaseMapper<Corpus> {
     //查看库中种类所属的语料总数且状态为上线(corpus_status=1)
     @Select("select count(1) from t_corpus where kind_id=#{kind_id}")
     Integer kindCountCors(@Param("kind_id")Integer kindId);
+
+
+
+    //管理员
+
+    //管理员查询语料总数
+    @Select("select count(1) from t_corpus")
+    int selectAllCorpus();
+    //管理员查看状态为上线的语料总数
+    @Select("select count(1) from t_corpus where corpus_status='1'")
+    int selectStatusone();
+    //查看所有状态为下线的语料总数
+    @Select("select count(1) from t_corpus where corpus_status not in ('1')")
+    int selectAllLineCorpus();
 }
 
 

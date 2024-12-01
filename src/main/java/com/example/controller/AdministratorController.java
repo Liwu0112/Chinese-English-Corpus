@@ -2,11 +2,9 @@ package com.example.controller;
 
 import com.example.service.AdministratorService;
 import com.example.utils.api.BaseApiService;
+import com.example.utils.api.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author liwu
@@ -22,6 +20,25 @@ public class AdministratorController extends BaseApiService {
     private AdministratorService administratorService;
 
     //查看语料总数
+    @GetMapping("/selectallcors")
+    public BaseResponse adminSelectAllCorpus(){
+        int result = administratorService.selectAllCorpus();
+        return setResultSuccessData(result);
+    }
+
+    //查看上线的语料总数
+    @GetMapping("/selectallonlinecors")
+    public BaseResponse adminsSelectAllOnlineCorpus(){
+        int result = administratorService.selectAllStatusOne();
+        return setResultSuccessData(result);
+    }
+
+    //查看所有状态为下线的语料总数
+    @GetMapping("/selectallline")
+    public BaseResponse adminSelectAllLine(){
+        int result = administratorService.selectAllLine();
+        return setResultSuccessData(result);
+    }
 
     //新增分类
 
