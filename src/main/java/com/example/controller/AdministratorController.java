@@ -25,20 +25,6 @@ public class AdministratorController extends BaseApiService {
         int result = administratorService.selectAllCorpus();
         return setResultSuccessData(result);
     }
-
-    //查看上线的语料总数
-    @GetMapping("/selectallonlinecors")
-    public BaseResponse adminsSelectAllOnlineCorpus(){
-        int result = administratorService.selectAllStatusOne();
-        return setResultSuccessData(result);
-    }
-
-    //查看所有状态为下线的语料总数
-    @GetMapping("/selectallline")
-    public BaseResponse adminSelectAllLine(){
-        int result = administratorService.selectAllLine();
-        return setResultSuccessData(result);
-    }
     //查看种类总数
     @GetMapping("/selectallkind")
     public BaseResponse adminSelectAllKinds(){
@@ -51,7 +37,31 @@ public class AdministratorController extends BaseApiService {
         int result = administratorService.selectAllType();
         return setResultSuccessData(result);
     }
+    //查看种类下语料数
+    @GetMapping("/selectKindcors")
+    public BaseResponse adminSelectKindCors(@RequestParam("kindName")String kindName){
+        int result = administratorService.selectKindCors(kindName);
+        return setResultSuccessData(result);
+    }
+    //按种类名查询语料上线数
+    @GetMapping("selectonlinebykindname")
+    public BaseResponse amdinSelectOnlineByKindName(@RequestParam("kindName")String kindName){
+        int result = administratorService.selectKindOnlineCor(kindName);
+        return setResultSuccessData(result);
+    }
+    //按种类名查询下线数
+    @GetMapping("selectofflinebykindname")
+    public BaseResponse adminSelectOffLineByKindName(@RequestParam("kindName")String kindName){
+        int result = administratorService.selectKindLineCor(kindName);
+        return setResultSuccessData(result);
+    }
 
+    //查看普通用户数量
+    @GetMapping("/selectreusercount")
+    public BaseResponse adminSelectReUserCount(){
+        int result = administratorService.selectReUserCount();
+        return setResultSuccessData(result);
+    }
     //新增分类
 
     //新增语料

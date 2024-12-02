@@ -3,6 +3,7 @@ package com.example.service.lmp;
 import com.example.mapper.CorpusMapper;
 import com.example.mapper.KindMapper;
 import com.example.mapper.TypeMapper;
+import com.example.mapper.UserMapper;
 import com.example.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,25 +23,14 @@ public class AdministratorServiceImp implements AdministratorService {
     private KindMapper kindMapper;
     @Autowired
     private TypeMapper typeMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     //管理员查看语料总数
     @Override
     public int selectAllCorpus() {
         return corpusMapper.selectAllCorpus();
     }
-
-    //查看所有状态为上线的语料总数
-    @Override
-    public int selectAllStatusOne() {
-        return corpusMapper.countCorpusStatusOne();
-    }
-
-    //查看所有状态为下线的语料总数
-    @Override
-    public int selectAllLine() {
-        return corpusMapper.selectAllLineCorpus();
-    }
-
     //查看种类总数
     @Override
     public int selectAllKind() {
@@ -51,5 +41,32 @@ public class AdministratorServiceImp implements AdministratorService {
     public int selectAllType(){
         return typeMapper.countType();
     }
+
+    //查看种类下语料数
+    @Override
+    public int selectKindCors(String kindName) {
+        int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+        return corpusMapper.selectkindCor(kindId);
+    }
+
+    //查看种类下语料上线数
+    @Override
+    public int selectKindOnlineCor(String kindName) {
+        int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+        return corpusMapper.kindCountCors(kindId);
+    }
+
+    //查看种类下语料下线数
+    @Override
+    public int selectKindLineCor(String kindName) {
+        int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+        return corpusMapper.selectCorLineByKindId(kindId);
+    }
+    //查询普通用户总数
+    @Override
+    public int selectReUserCount() {
+        return userMapper.selectAllReUser();
+    }
+
 
 }

@@ -10,16 +10,16 @@ public interface AdministratorService {
 
     //管理员查看语料总数
     int selectAllCorpus();
-
-    //管理员查看状态为上线的语料总数
-    int selectAllStatusOne();
-
-    //查看所有状态为下线的语料总数
-    int selectAllLine();
-
     //查看种类总数
     int selectAllKind();
-
     //查看分类总数
     int selectAllType();
+    //查看种类下语料数
+    int selectKindCors(String kindName);
+    //查看种类下语料上线数
+    int selectKindOnlineCor(String kindName);
+    //查看种类下语料下线数
+    int selectKindLineCor(String kindName);
+    //查询普通用户总数
+    int selectReUserCount();
 }

@@ -101,7 +101,7 @@
 
 #### 用户退出
 
-请求方式：GET
+请求方式：POST
 
 请求地址：/common/logout
 
@@ -426,7 +426,7 @@
 
 #### 查看库中种类所属的语料总数且状态为上线(corpus_status=1)
 
-请求方式：POST
+请求方式：GET
 
 请求地址：/regularuser/rescorpusbykindname
 
@@ -443,4 +443,150 @@
 ```
 
 ### 管理员控制类
+
+#### 查询语料总数
+
+请求方式：GET
+
+请求地址：/admin/selectallcors
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 14
+}
+```
+
+#### 查询语料总数
+
+请求方式：GET
+
+请求地址：/regularuser/rescorpusbykindname
+
+请求参数：/regularuser/rescorpusbykindname?kindName=
+
+响应成功参数：
+
+#### 查看种类总数
+
+请求方式：GET
+
+请求地址：/admin/selectallkind
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 10
+}
+```
+
+#### 查询语料总数
+
+请求方式：GET
+
+请求地址：/admin/selectallkind
+
+响应成功参数：
+
+#### 查询语料总数
+
+请求方式：GET
+
+请求地址：/regularuser/rescorpusbykindname
+
+请求参数：/regularuser/rescorpusbykindname?kindName=
+
+响应成功参数：
+
+#### 查看分类总数
+
+请求方式：GET
+
+请求地址：/admin/selectalltype
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 11
+}
+```
+
+#### 查看种类下语料数
+
+请求方式：GET
+
+请求地址：/admin/selectKindcors
+
+请求参数：admin/selectKindcors?kindName=
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 13
+}
+```
+
+#### 按种类名查询语料上线数
+
+请求方式：GET
+
+请求地址：/admin/selectonlinebykindname
+
+请求参数：/admin/selectonlinebykindname?kindName=
+
+响应成功参数：
+
+```
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 12
+}
+```
+
+#### 按种类名查询语料下线数
+
+请求方式：GET
+
+请求地址：/admin/selectofflinebykindname
+
+请求参数：/selectofflinebykindname?kindName=
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 1
+}
+```
+
+#### 查看普通用户数量
+
+请求方式：GET
+
+请求地址：/admin/selectreusercount
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 2
+}
+```
 

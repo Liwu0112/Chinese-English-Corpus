@@ -24,6 +24,10 @@ public interface UserMapper extends BaseMapper<User> {
     //修改用户密码
     @Update("update t_user set password=#{userNewPassword} where user_name=#{userName}")
     int updateUserPassword(@Param("userName")String userName,@Param("userNewPassword")String userNewPassword);
+
+    //查询普通用户总数
+    @Select("select count(1) from t_user where role='regular_user'")
+    int selectAllReUser();
 }
 
 

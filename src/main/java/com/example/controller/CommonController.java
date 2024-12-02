@@ -77,7 +77,7 @@ public class CommonController extends BaseApiService {
         }
     }
     //用户注销登录
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public BaseResponse usersLogout(HttpServletResponse response) {
         // 调用拦截器中的方法删除Cookie
         cookieInterceptor.deleteCookie(response,"cookieName");
