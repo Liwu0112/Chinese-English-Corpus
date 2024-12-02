@@ -16,4 +16,10 @@ public interface AdministratorService {
 
     //查看所有状态为下线的语料总数
     int selectAllLine();
+
+    //查看种类总数
+    int selectAllKind();
+
+    //查看分类总数
+    int selectAllType();
 }

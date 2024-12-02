@@ -39,6 +39,18 @@ public class AdministratorController extends BaseApiService {
         int result = administratorService.selectAllLine();
         return setResultSuccessData(result);
     }
+    //查看种类总数
+    @GetMapping("/selectallkind")
+    public BaseResponse adminSelectAllKinds(){
+        int result = administratorService.selectAllKind();
+        return setResultSuccessData(result);
+    }
+    //查看分类总数
+    @GetMapping("selectalltype")
+    public BaseResponse adminSelectAllTypes(){
+        int result = administratorService.selectAllType();
+        return setResultSuccessData(result);
+    }
 
     //新增分类
 
