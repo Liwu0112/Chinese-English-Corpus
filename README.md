@@ -460,16 +460,6 @@
 }
 ```
 
-#### 查询语料总数
-
-请求方式：GET
-
-请求地址：/regularuser/rescorpusbykindname
-
-请求参数：/regularuser/rescorpusbykindname?kindName=
-
-响应成功参数：
-
 #### 查看种类总数
 
 请求方式：GET
@@ -485,24 +475,6 @@
     "data": 10
 }
 ```
-
-#### 查询语料总数
-
-请求方式：GET
-
-请求地址：/admin/selectallkind
-
-响应成功参数：
-
-#### 查询语料总数
-
-请求方式：GET
-
-请求地址：/regularuser/rescorpusbykindname
-
-请求参数：/regularuser/rescorpusbykindname?kindName=
-
-响应成功参数：
 
 #### 查看分类总数
 
