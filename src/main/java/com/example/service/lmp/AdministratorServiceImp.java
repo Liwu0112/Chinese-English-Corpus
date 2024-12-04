@@ -1,5 +1,6 @@
 package com.example.service.lmp;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.dto.AdminSelectAllCorpusDto;
 import com.example.dto.SelectAllKindName;
 import com.example.dto.SelectTypeNames;
@@ -89,6 +90,19 @@ public class AdministratorServiceImp implements AdministratorService {
     public List<SelectTypeNames> selectAllType(String kindName) {
         int id = kindMapper.selectKindIdByKindNameInteger(kindName);
         return typeMapper.selectTypeNamesByKId(id);
+    }
+    //修改语料
+    @Override
+    public int updateCorpus(Integer corpusId,String chineseText, String englishText, String kindName, String typeName, Object corpusStatus) {
+    int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+    int typeId = typeMapper.selectTypeIdInteger(typeName);
+    int result = corpusMapper.updateCorpus(corpusId,chineseText,englishText,kindId,typeId,corpusStatus);
+    return result;
+    }
+
+    @Override
+    public int deleteCorpus(Integer corpusId) {
+        return corpusMapper.deleteCorpus(corpusId);
     }
 
 

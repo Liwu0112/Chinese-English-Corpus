@@ -3,9 +3,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.dto.AdminSelectAllCorpusDto;
 import com.example.dto.CorpusDto;
 import com.example.entity.Corpus;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
 
 
@@ -44,8 +43,17 @@ public interface CorpusMapper extends BaseMapper<Corpus> {
     @Select("select count(1) from t_corpus where kind_id=#{kind_id} and corpus_status not in ('1')")
     int selectCorLineByKindId(@Param("kind_id")Integer kindId);
     //查询所有语料
-    @Select(("SELECT c.corpus_id,c.chinese_text, c.english_text, k.kind_name, t.type_name ,c.corpus_status,c.creator,c.creation_time FROM t_corpus c LEFT JOIN t_type t ON c.type_id = t.type_id LEFT JOIN t_kind k ON c.kind_id = k.kind_id "))
+    @Select("SELECT c.corpus_id,c.chinese_text, c.english_text, k.kind_name, t.type_name ,c.corpus_status,c.creator,c.creation_time FROM t_corpus c LEFT JOIN t_type t ON c.type_id = t.type_id LEFT JOIN t_kind k ON c.kind_id = k.kind_id ")
     List<AdminSelectAllCorpusDto> selectAllCorpus();
+    //查询是否存在当前语料
+    @Select("select * from t_corpus where chinese_text=#{chineseText} and english_text=#{englishText}")
+    List<Corpus> selectThisCorpus(@Param("chineseText")String chineseText,@Param("englishText")String englishText);
+    //修改语料
+    @Update("update t_corpus set chinese_text=#{chineseText},english_text=#{englishText},kind_id=#{kindId},type_id=#{typeId},corpus_status=#{corpusStatus} where corpus_id=#{corpusId}")
+    int updateCorpus(@Param("corpusId")Integer corpusId,@Param("chineseText")String chineseText,@Param("englishText")String englishText,@Param("kindId")int kindId,@Param("typeId")int typeId,@Param("corpusStatus")Object corpusStatus);
+    //删除语料
+    @Delete("delete from t_corpus where corpus_id = #{corpusId}")
+    int deleteCorpus(@Param("corpusId")Integer corpusId);
 }
 
 

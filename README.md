@@ -448,7 +448,7 @@
 
 请求方式：GET
 
-请求地址：/admin/selectallcors
+请求地址：/admin/selectallcorscount
 
 响应成功参数：
 
@@ -464,7 +464,7 @@
 
 请求方式：GET
 
-请求地址：/admin/selectallkind
+请求地址：/admin/selectallkindcount
 
 响应成功参数：
 
@@ -480,7 +480,7 @@
 
 请求方式：GET
 
-请求地址：/admin/selectalltype
+请求地址：/admin/selectalltypecount
 
 响应成功参数：
 
@@ -559,6 +559,170 @@
     "code": 200,
     "msg": "ok",
     "data": 2
+}
+```
+
+#### 查看所有语料
+
+请求方式：GET
+
+请求地址：/admin/selectallcors
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": [
+        {
+            "corpusId": 1,
+            "chineseText": "保安室；门卫室;值班岗",
+            "englishText": "Security",
+            "kindName": "通则",
+            "typeName": "安全保卫、消防类",
+            "corpusStatus": "1",
+            "creator": "admin",
+            "creationTime": "2024-11-25T09:01:03.000+00:00"
+        }
+```
+
+响应失败参数：
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
+}
+```
+
+#### 修改语料
+
+请求方式：POST
+
+请求地址：/admin/updatecorpus
+
+请求参数：
+
+```json
+{
+    "id":"1",
+    "chineseText":"保安室；门卫室;值班岗",
+    "englishText":"Security 或Security Booth/Guard/Office/Room",
+    "kindName":"通则",
+    "typeName":"安全保卫、消防类",
+    "corpusStatus":"0"
+}
+```
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": null
+}
+```
+
+响应失败参数：
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
+}
+```
+
+#### 查看所有种类名
+
+请求方式：GET
+
+请求地址：/admin/selectallkind
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": [
+        {
+            "kindName": "通则"
+        },
+        {
+            "kindName": "交通"
+        },
+        {
+            "kindName": "旅游"
+        },
+        {
+            "kindName": "文化娱乐"
+        },
+        {
+            "kindName": "体育"
+        },
+        {
+            "kindName": "教育"
+        },
+        {
+            "kindName": "医疗卫生"
+        },
+        {
+            "kindName": "邮政电信"
+        },
+        {
+            "kindName": "餐饮住宿"
+        },
+        {
+            "kindName": "商业金融"
+        }
+    ]
+}
+```
+
+#### 用种类名查看其所有分类名
+
+请求方式：GET
+
+请求地址：/admin/selectalltype
+
+请求参数：/admin/selectalltype?kindName=
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": [
+        {
+            "typeName": "安全保卫、消防类"
+        },
+        {
+            "typeName": "医疗急救类"
+        }
+    ]
+}
+```
+
+#### 删除语料
+
+请求方式：GET
+
+请求地址：/admin/deletecorpus
+
+请求参数：/admin/deletecorpus?corpusId=
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": null
 }
 ```
 

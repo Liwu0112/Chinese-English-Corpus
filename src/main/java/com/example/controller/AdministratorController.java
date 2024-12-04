@@ -3,11 +3,11 @@ package com.example.controller;
 import com.example.dto.AdminSelectAllCorpusDto;
 import com.example.dto.SelectAllKindName;
 import com.example.dto.SelectTypeNames;
+import com.example.dto.AdminUpdateCorpusDto;
 import com.example.entity.Corpus;
 import com.example.service.AdministratorService;
 import com.example.utils.api.BaseApiService;
 import com.example.utils.api.BaseResponse;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,23 +75,37 @@ public class AdministratorController extends BaseApiService {
         List<AdminSelectAllCorpusDto> list= administratorService.selectAllCorpus();
         return setResultSuccessData(list);
     }
-
-
     //查看所有种类名
     @GetMapping("/selectallkind")
     public BaseResponse adminSelectAllKind(){
         List<SelectAllKindName> list =administratorService.selectAllKindName();
         return setResultSuccessData(list);
     }
-
-    //查看所有分类名
+    //用种类名查看其所有分类名
     @GetMapping("/selectalltype")
     public BaseResponse adminSelectAllType(@RequestParam("kindName")String kindName){
         List<SelectTypeNames> result = administratorService.selectAllType(kindName);
         return setResultSuccessData(result);
     }
+    //修改语料
+    @PostMapping("/updatecorpus")
+    public BaseResponse adminUpdateCorpus(@RequestBody AdminUpdateCorpusDto adminUpdateCorpusDto){
+        Integer corpusId = adminUpdateCorpusDto.getCorpusId();
+        String chineseText = adminUpdateCorpusDto.getChineseText();
+        String englishText = adminUpdateCorpusDto.getEnglishText();
+        String kindName = adminUpdateCorpusDto.getKindName();
+        String typeName = adminUpdateCorpusDto.getTypeName();
+        Object corpusStatus = adminUpdateCorpusDto.getCorpusStatus();
+        int result = administratorService.updateCorpus(corpusId, chineseText, englishText, kindName, typeName, corpusStatus);
+        return setResultDb(result);
+    }
+    //删除语料
+    @GetMapping("/deletecorpus")
+    public BaseResponse adminDeleteCorpus(@RequestParam("corpusId")Integer corpusId){
+        int result =administratorService.deleteCorpus(corpusId);
+        return setResultDb(result);
+    }
     //新增分类
-
     //新增语料
 
     //修改语料

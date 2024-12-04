@@ -35,4 +35,8 @@ public interface AdministratorService {
     List<SelectAllKindName> selectAllKindName();
     //查看所有分类名
     List<SelectTypeNames> selectAllType(String kindName);
+    //修改语料
+    int updateCorpus(Integer corpusId,String chineseText,String englishText,String kindName,String typeName,Object corpusStatus);
+    //删除语料
+    int deleteCorpus(Integer corpusId);
 }
