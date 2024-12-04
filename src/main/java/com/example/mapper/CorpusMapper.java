@@ -1,5 +1,6 @@
 package com.example.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.dto.AdminSelectAllCorpusDto;
 import com.example.dto.CorpusDto;
 import com.example.entity.Corpus;
 import org.apache.ibatis.annotations.Mapper;
@@ -35,16 +36,16 @@ public interface CorpusMapper extends BaseMapper<Corpus> {
 
     //查询语料总数
     @Select("select count(1) from t_corpus")
-    int selectAllCorpus();
-    //查看所有状态为下线的语料总数
-    @Select("select count(1) from t_corpus where corpus_status not in ('1')")
-    int selectAllLineCorpus();
+    int selectAllCorpusCount();
     //查看种类下语料数
     @Select("select count(1) from t_corpus where kind_id=#{kind_id}")
     int selectkindCor(@Param("kind_id")Integer kindId);
     //查看种类下语料下线数
     @Select("select count(1) from t_corpus where kind_id=#{kind_id} and corpus_status not in ('1')")
     int selectCorLineByKindId(@Param("kind_id")Integer kindId);
+    //查询所有语料
+    @Select(("SELECT c.corpus_id,c.chinese_text, c.english_text, k.kind_name, t.type_name ,c.corpus_status,c.creator,c.creation_time FROM t_corpus c LEFT JOIN t_type t ON c.type_id = t.type_id LEFT JOIN t_kind k ON c.kind_id = k.kind_id "))
+    List<AdminSelectAllCorpusDto> selectAllCorpus();
 }
 
 

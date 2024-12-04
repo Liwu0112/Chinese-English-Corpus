@@ -1,5 +1,9 @@
 package com.example.service.lmp;
 
+import com.example.dto.AdminSelectAllCorpusDto;
+import com.example.dto.SelectAllKindName;
+import com.example.dto.SelectTypeNames;
+import com.example.entity.Corpus;
 import com.example.mapper.CorpusMapper;
 import com.example.mapper.KindMapper;
 import com.example.mapper.TypeMapper;
@@ -7,6 +11,8 @@ import com.example.mapper.UserMapper;
 import com.example.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author liwu
@@ -28,37 +34,37 @@ public class AdministratorServiceImp implements AdministratorService {
 
     //管理员查看语料总数
     @Override
-    public int selectAllCorpus() {
-        return corpusMapper.selectAllCorpus();
+    public int selectAllCorpusCount() {
+        return corpusMapper.selectAllCorpusCount();
     }
     //查看种类总数
     @Override
-    public int selectAllKind() {
+    public int selectAllKindCount() {
         return kindMapper.countKind();
     }
     //查看分类总数
     @Override
-    public int selectAllType(){
+    public int selectAllTypeCount(){
         return typeMapper.countType();
     }
 
     //查看种类下语料数
     @Override
-    public int selectKindCors(String kindName) {
+    public int selectKindCorsCount(String kindName) {
         int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
         return corpusMapper.selectkindCor(kindId);
     }
 
     //查看种类下语料上线数
     @Override
-    public int selectKindOnlineCor(String kindName) {
+    public int selectKindOnlineCorCount(String kindName) {
         int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
         return corpusMapper.kindCountCors(kindId);
     }
 
     //查看种类下语料下线数
     @Override
-    public int selectKindLineCor(String kindName) {
+    public int selectKindLineCorCount(String kindName) {
         int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
         return corpusMapper.selectCorLineByKindId(kindId);
     }
@@ -66,6 +72,23 @@ public class AdministratorServiceImp implements AdministratorService {
     @Override
     public int selectReUserCount() {
         return userMapper.selectAllReUser();
+    }
+
+    //查看所有语料
+    @Override
+    public List<AdminSelectAllCorpusDto> selectAllCorpus() {
+        return corpusMapper.selectAllCorpus();
+    }
+    //查看所有种类名
+    @Override
+    public List<SelectAllKindName> selectAllKindName() {
+        return kindMapper.selectAllKindName();
+    }
+    //查看所有分类名
+    @Override
+    public List<SelectTypeNames> selectAllType(String kindName) {
+        int id = kindMapper.selectKindIdByKindNameInteger(kindName);
+        return typeMapper.selectTypeNamesByKId(id);
     }
 
 

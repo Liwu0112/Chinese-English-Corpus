@@ -23,7 +23,6 @@ public interface TypeMapper extends BaseMapper<Type> {
     //使用type_name查询type_id
     @Select("select type_id from t_type where type_name=#{typeName}")
     Integer selectTypeIdInteger(@Param("typeName")String typeName);
-
     //查看分类总数（t_type)
     @Select("select count(1) from t_type")
     Integer countType();
