@@ -54,6 +54,15 @@ public interface CorpusMapper extends BaseMapper<Corpus> {
     //删除语料
     @Delete("delete from t_corpus where corpus_id = #{corpusId}")
     int deleteCorpus(@Param("corpusId")Integer corpusId);
+    //根据中文文本或者英文文本查询新增语料Id
+    @Select("select corpus_id from t_corpus where chinese_text=#{chineseText} and english_text=#{englishText}")
+    int selectCorpusIdByChAndEn(@Param("chineseText")String chineseText,@Param("englishText")String englishText);
+    //查询当前条件为中文文本和英文文本，返回为当前中文文本和英文文本在数据库中的总数
+    @Select("select count(1) from t_corpus where chinese_text=#{chineseText} and english_text=#{englishText}")
+    int selectCountByChAndEn(@Param("chineseText")String chineseText,@Param("englishText")String englishText);
+    //新增语料
+    @Insert("insert into t_corpus ( `chinese_text`, `english_text`, `kind_id`, `type_id`, `corpus_status`, `creator`) values (#{chinseText},#{englishText},#{kindId},#{typeId},#{corpusStatus},#{creator})")
+    int adminInsertCorpus(@Param("chinseText")String chineseText,@Param("englishText")String englishText,@Param("kindId")Integer kindId,@Param("typeId")Integer typeId,@Param("corpusStatus") Object corpusStatus,@Param("creator")String creator);
 }
 
 

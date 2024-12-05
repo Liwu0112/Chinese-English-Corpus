@@ -4,7 +4,11 @@ import com.example.dto.AdminSelectAllCorpusDto;
 import com.example.dto.SelectAllKindName;
 import com.example.dto.SelectTypeNames;
 import com.example.entity.Corpus;
+import com.example.utils.api.BaseResponse;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -39,4 +43,12 @@ public interface AdministratorService {
     int updateCorpus(Integer corpusId,String chineseText,String englishText,String kindName,String typeName,Object corpusStatus);
     //删除语料
     int deleteCorpus(Integer corpusId);
+    //新增单个语料
+    int insertOneCorpus(String chineseText,String englishText,String kindName,String typeName,Object corpusStatus,String creator);
+    //使用中文文本或英文文本查寻id
+    int selectCorpusIdByCE(String chineseText,String englishText);
+    //批量新增
+    BaseResponse importCorpusFromExcel(MultipartFile file);
+    //模板文件
+    ByteArrayResource generateTemplate();
 }
