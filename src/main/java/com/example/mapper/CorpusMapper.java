@@ -63,6 +63,12 @@ public interface CorpusMapper extends BaseMapper<Corpus> {
     //新增语料
     @Insert("insert into t_corpus ( `chinese_text`, `english_text`, `kind_id`, `type_id`, `corpus_status`, `creator`) values (#{chinseText},#{englishText},#{kindId},#{typeId},#{corpusStatus},#{creator})")
     int adminInsertCorpus(@Param("chinseText")String chineseText,@Param("englishText")String englishText,@Param("kindId")Integer kindId,@Param("typeId")Integer typeId,@Param("corpusStatus") Object corpusStatus,@Param("creator")String creator);
+    //查看当前分类下是否还有语料
+    @Select("select count(1) from t_corpus where type_id=#{typeId}")
+    int selectCountByTypeId(@Param("typeId")Integer typeId);
+    //修改语料种类Id
+    @Update("update t_corpus set kind_id=#{kindId} where type_id=#{typeId}")
+    int updateCorpusKindId(@Param("kindId")Integer kindId,@Param("typeId")Integer typeId);
 }
 
 

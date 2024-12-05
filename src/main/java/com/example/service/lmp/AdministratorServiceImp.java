@@ -1,10 +1,7 @@
 package com.example.service.lmp;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.dto.AdminSelectAllCorpusDto;
-import com.example.dto.SelectAllKindName;
-import com.example.dto.SelectTypeNames;
-import com.example.entity.Corpus;
+import com.example.dto.*;
 import com.example.mapper.CorpusMapper;
 import com.example.mapper.KindMapper;
 import com.example.mapper.TypeMapper;
@@ -20,7 +17,6 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
@@ -268,6 +264,44 @@ public class AdministratorServiceImp implements AdministratorService {
             e.printStackTrace();
             return null;
         }
+    }
+    //查看所有分类信息
+    @Override
+    public List<AdminOperateType> selectAlltype() {
+        return typeMapper.typeList();
+    }
+    //修改分类
+    @Override
+    public int updateType(Integer typeId, String kindName, String typeName) {
+        int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+        int count = typeMapper.selectTypeByTypeName(typeName);
+        AdminInsertTypeDto adminInsertTypeDto = typeMapper.typeListByTypeId(typeId);
+        String dbKindName = adminInsertTypeDto.getKindName();
+        String dbTYpeName = adminInsertTypeDto.getTypeName();
+        if (count == 0 || !dbKindName.equals(kindName) || !dbTYpeName.equals(typeName)) {
+            corpusMapper.updateCorpusKindId(kindId, typeId);
+            return typeMapper.updateTypeInfo(typeId, kindId, typeName);
+        }
+        return 0;
+    }
+    //删除分类
+    @Override
+    public int deleteType(Integer typeId) {
+        int count = corpusMapper.selectCountByTypeId(typeId);
+        if (count==0){
+            return typeMapper.deleteTypeByTypeId(typeId);
+        }
+        return 0;
+    }
+    //新增分类
+    @Override
+    public int insertType(String kindName, String typeName) {
+        int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+        int count = typeMapper.selectTypeByTypeName(typeName);
+        if (count==0){
+            return typeMapper.insertType(kindId,typeName);
+        }
+        return 0;
     }
 }
 

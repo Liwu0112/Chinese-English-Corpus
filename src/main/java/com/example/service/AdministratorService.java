@@ -1,14 +1,13 @@
 package com.example.service;
 
 import com.example.dto.AdminSelectAllCorpusDto;
+import com.example.dto.AdminOperateType;
 import com.example.dto.SelectAllKindName;
 import com.example.dto.SelectTypeNames;
-import com.example.entity.Corpus;
 import com.example.utils.api.BaseResponse;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -51,4 +50,12 @@ public interface AdministratorService {
     BaseResponse importCorpusFromExcel(MultipartFile file);
     //模板文件
     ByteArrayResource generateTemplate();
+    //查看所有分类信息
+    List<AdminOperateType> selectAlltype();
+    //修改分类
+    int updateType(Integer typeId,String kindName,String typeName);
+    //删除分类
+    int deleteType(Integer typeId);
+    //新增分类
+    int insertType(String kindName,String typeName);
 }

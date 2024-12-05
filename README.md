@@ -726,3 +726,167 @@
 }
 ```
 
+#### 新增单个语料
+
+请求方式：POST
+
+请求地址：/admin/insertonecorpus
+
+请求参数：
+
+```json
+{
+    "chineseText":"11",
+    "englishText":"12",
+    "kindName":"通则",
+    "typeName":"安全保卫、消防类",
+    "corpusStatus":"1",
+    "creator":"lys"
+}
+```
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": null
+}
+```
+
+响应失败参数：
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
+}
+```
+
+#### 批量新增
+
+请求方式：POST
+
+请求地址：/admin/insertmorecorpus
+
+请求参数：见模板文件
+
+#### 模板文件获取
+
+请求方式：GET
+
+请求地址：/admin/downloadTemplate
+
+#### 查看所有分类信息
+
+请求方式：GET
+
+请求地址：/admin/selectalltypes
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": [
+        {
+            "typeId": 1,
+            "kindName": "文化娱乐",
+            "typeName": "安全保卫"
+        }
+    ]
+}
+```
+
+#### 修改分类
+
+请求方式：POST
+
+请求地址：/admin/updatetype
+
+请求参数：
+
+```json
+{
+    "typeId":"10",
+    "kindName":"体育",
+    "typeName":"出入境类"
+}
+```
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": null
+}
+```
+
+响应失败参数：
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
+}
+```
+
+#### 删除分类
+
+请求方式：GET
+
+请求地址：/admin/updatetype
+
+请求参数：admin/deletetype?typeId=
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": null
+}
+```
+
+#### 新增分类
+
+请求方式：POST
+
+请求地址：/admin/inserttype
+
+请求参数：
+
+```json
+{
+    "kindName":"文化娱乐",
+    "typeName":"测试"
+}
+```
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": null
+}
+```
+
+响应失败参数：
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
+}
+```
+

@@ -4,25 +4,15 @@ import com.example.dto.*;
 import com.example.service.AdministratorService;
 import com.example.utils.api.BaseApiService;
 import com.example.utils.api.BaseResponse;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Iterator;
+
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author liwu
@@ -170,5 +160,33 @@ public class AdministratorController extends BaseApiService {
                 .contentLength(resource.contentLength())
                 .body(resource);
     }
-
+    //查看所有分类信息
+    @GetMapping("/selectalltypes")
+    public BaseResponse adminSelectAllType(){
+        List<AdminOperateType> list = administratorService.selectAlltype();
+        return setResultSuccessData(list);
+    }
+    //修改分类
+    @PostMapping("/updatetype")
+    public BaseResponse adminUpdateType(@RequestBody AdminOperateType adminOperateType){
+        int typeId = adminOperateType.getTypeId();
+        String kindName = adminOperateType.getKindName();
+        String typeName = adminOperateType.getTypeName();
+        int result = administratorService.updateType(typeId,kindName,typeName);
+        return setResultDb(result);
+    }
+    //删除分类
+    @GetMapping("/deletetype")
+    public BaseResponse adminDeleteType(@RequestParam("typeId")Integer typeId){
+        int result = administratorService.deleteType(typeId);
+        return setResultDb(result);
+    }
+    //新增分类
+    @PostMapping("/inserttype")
+    public BaseResponse adminInsertType(@RequestBody AdminInsertTypeDto adminInsertTypeDto){
+        String kindName = adminInsertTypeDto.getKindName();
+        String typeName = adminInsertTypeDto.getTypeName();
+        int result = administratorService.insertType(kindName,typeName);
+        return setResultDb(result);
+    }
 }
