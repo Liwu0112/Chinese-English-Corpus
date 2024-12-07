@@ -2,8 +2,12 @@ package com.example.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.dto.ReUserInfo;
 import com.example.entity.User;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 /**
 * @author Xiao-Li
@@ -28,6 +32,18 @@ public interface UserMapper extends BaseMapper<User> {
     //查询普通用户总数
     @Select("select count(1) from t_user where role='regular_user'")
     int selectAllReUser();
+    //查看所有普通用户信息（编号，账户，注册时间，类型）
+    @Select("select * from t_user where role='regular_user'")
+    List<ReUserInfo> selectAllRegularUserInfo();
+    //将普通用户设置为管理员
+    @Update("update t_user set role='admin' where user_id=#{userId}")
+    int updateRoleToAdmin(@Param("userId")Integer userId);
+    //重置密码
+    @Update("update t_user set password=#{passWord} where user_id=#{userId}")
+    int resetReuserPassword(@Param("userId")Integer userId,@Param("passWord")String passWord);
+    //删除普通用户
+    @Delete("delete from t_user where user_id=#{userId}")
+    int adminDeleteReUser(@Param("userId")Integer userId);
 }
 
 

@@ -7,6 +7,7 @@ import com.example.mapper.KindMapper;
 import com.example.mapper.TypeMapper;
 import com.example.mapper.UserMapper;
 import com.example.service.AdministratorService;
+import com.example.utils.MD5Utils;
 import com.example.utils.api.BaseResponse;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -302,6 +303,27 @@ public class AdministratorServiceImp implements AdministratorService {
             return typeMapper.insertType(kindId,typeName);
         }
         return 0;
+    }
+    //查看所有普通用户信息（编号，账户，注册时间，类型）
+    @Override
+    public List<ReUserInfo> selectAllReUserInfo() {
+        return userMapper.selectAllRegularUserInfo();
+    }
+    //将普通用户设置为管理员
+    @Override
+    public int updateUserRole(Integer userId) {
+        return userMapper.updateRoleToAdmin(userId);
+    }
+    //重置密码
+    @Override
+    public int resetPassword(Integer userId) {
+        String passWord = MD5Utils.md5("123456");
+        return userMapper.resetReuserPassword(userId,passWord);
+    }
+    //删除用户
+    @Override
+    public int deleteUser(Integer userId) {
+        return userMapper.adminDeleteReUser(userId);
     }
 }
 

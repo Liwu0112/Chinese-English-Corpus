@@ -1,9 +1,6 @@
 package com.example.service;
 
-import com.example.dto.AdminSelectAllCorpusDto;
-import com.example.dto.AdminOperateType;
-import com.example.dto.SelectAllKindName;
-import com.example.dto.SelectTypeNames;
+import com.example.dto.*;
 import com.example.utils.api.BaseResponse;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,4 +55,12 @@ public interface AdministratorService {
     int deleteType(Integer typeId);
     //新增分类
     int insertType(String kindName,String typeName);
+    //查看所有普通用户信息（编号，账户，注册时间，类型）
+    List<ReUserInfo> selectAllReUserInfo();
+    //将普通用户设置为管理员
+    int updateUserRole(Integer userId);
+    //重置密码
+    int resetPassword(Integer userId);
+    //删除用户
+    int deleteUser(Integer userId);
 }

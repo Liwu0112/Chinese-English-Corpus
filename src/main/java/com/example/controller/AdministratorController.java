@@ -189,4 +189,31 @@ public class AdministratorController extends BaseApiService {
         int result = administratorService.insertType(kindName,typeName);
         return setResultDb(result);
     }
+    //查看所有普通用户信息（编号，账户，注册时间，类型）
+    @GetMapping("/selectallreuserinfo")
+    public BaseResponse adminSelectReUserIndfo(){
+        List<ReUserInfo> list = administratorService.selectAllReUserInfo();
+        return setResultSuccessData(list);
+    }
+    //将普通用户设置为管理员
+    @PostMapping("/updateuserrole")
+    public BaseResponse adminUpdateUserRole(@RequestBody DisposeUserIndoById disposeUserIndoById){
+        Integer userId = disposeUserIndoById.getUserId();
+        int result = administratorService.updateUserRole(userId);
+        return setResultDb(result);
+    }
+    //重置密码
+    @PostMapping("/resetpassword")
+    public BaseResponse adminResetPassword(@RequestBody DisposeUserIndoById disposeUserIndoById){
+        Integer userId = disposeUserIndoById.getUserId();
+        int result = administratorService.resetPassword(userId);
+        return setResultDb(result);
+    }
+    //删除用户
+    @PostMapping("/deleteuser")
+    public BaseResponse adminDeleteUSer(@RequestBody DisposeUserIndoById disposeUserIndoById){
+        Integer userId = disposeUserIndoById.getUserId();
+        int result = administratorService.deleteUser(userId);
+        return setResultDb(result);
+    }
 }
