@@ -1,6 +1,4 @@
 package com.example.service.lmp;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.dto.*;
 import com.example.mapper.CorpusMapper;
 import com.example.mapper.KindMapper;
@@ -112,7 +110,7 @@ public class AdministratorServiceImp implements AdministratorService {
     @Override
     public int updateCorpus(Integer corpusId, String chineseText, String englishText, String kindName, String typeName, Object corpusStatus) {
         int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
-        int typeId = typeMapper.selectTypeIdInteger(typeName);
+        int typeId = typeMapper.selectTypeIdInteger(typeName, kindId);
         int result = corpusMapper.updateCorpus(corpusId, chineseText, englishText, kindId, typeId, corpusStatus);
         return result;
     }
@@ -126,15 +124,16 @@ public class AdministratorServiceImp implements AdministratorService {
     //新增单个语料
     @Override
     public int insertOneCorpus(String chineseText, String englishText, String kindName, String typeName, Object corpusStatus, String creator) {
-        int a = corpusMapper.selectCountByChAndEn(chineseText, englishText);
+        int result = 0;
+        int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+        int typeId = typeMapper.selectTypeIdInteger(typeName, kindId);
+        int a = corpusMapper
+                .selectCountByChAndEn(chineseText, englishText,typeId,kindId);
         if (a == 0) {
-            int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
-            int typeId = typeMapper.selectTypeIdInteger(typeName);
-            int result = corpusMapper.adminInsertCorpus(chineseText, englishText, kindId, typeId, corpusStatus, creator);
-            return result;
-        } else {
-            return 0;
+            result = corpusMapper.adminInsertCorpus(chineseText, englishText, kindId, typeId, corpusStatus, creator);
         }
+        return result;
+
     }
 
     //使用中文文本或英文文本查寻id
@@ -266,11 +265,13 @@ public class AdministratorServiceImp implements AdministratorService {
             return null;
         }
     }
+
     //查看所有分类信息
     @Override
     public List<AdminOperateType> selectAlltype() {
         return typeMapper.typeList();
     }
+
     //修改分类
     @Override
     public int updateType(Integer typeId, String kindName, String typeName) {
@@ -285,41 +286,47 @@ public class AdministratorServiceImp implements AdministratorService {
         }
         return 0;
     }
+
     //删除分类
     @Override
     public int deleteType(Integer typeId) {
         int count = corpusMapper.selectCountByTypeId(typeId);
-        if (count==0){
+        if (count == 0) {
             return typeMapper.deleteTypeByTypeId(typeId);
         }
         return 0;
     }
+
     //新增分类
     @Override
     public int insertType(String kindName, String typeName) {
         int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
         int count = typeMapper.selectTypeByTypeName(typeName);
-        if (count==0){
-            return typeMapper.insertType(kindId,typeName);
+        if (count == 0) {
+            return typeMapper.insertType(kindId, typeName);
         }
         return 0;
     }
+
     //查看所有普通用户信息（编号，账户，注册时间，类型）
     @Override
     public List<ReUserInfo> selectAllReUserInfo() {
         return userMapper.selectAllRegularUserInfo();
     }
+
     //将普通用户设置为管理员
     @Override
     public int updateUserRole(Integer userId) {
         return userMapper.updateRoleToAdmin(userId);
     }
+
     //重置密码
     @Override
     public int resetPassword(Integer userId) {
         String passWord = MD5Utils.md5("123456");
-        return userMapper.resetReuserPassword(userId,passWord);
+        return userMapper.resetReuserPassword(userId, passWord);
     }
+
     //删除用户
     @Override
     public int deleteUser(Integer userId) {

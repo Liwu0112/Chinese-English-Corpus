@@ -7,6 +7,7 @@ import com.example.utils.api.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.ClientInfoStatus;
 import java.util.List;
 
 /**
@@ -30,6 +31,14 @@ public class RegularUserController extends BaseApiService {
         String passWord = regularUserEnroll.getPassWord();
         int a = regularUserService.regularuserEnroll(userName, passWord); //调用注册方法
         return setResultDb(a); //返回状态码为200，注册成功；返回状态码为500，注册失败，该用户已经注册
+    }
+
+
+    //查询所有语料
+    @GetMapping("/selectallcorpus")
+    public BaseResponse reUserSelectAllCorpus(){
+        List<CorpusDto> list = regularUserService.selectCorpus();
+        return setResultSuccessData(list);
     }
 
     /*使用前端传递的语料段查询语料

@@ -16,6 +16,9 @@ public interface RegularUserService {
     //普通用户注册
     int regularuserEnroll(String userName,String passWord);
 
+    //查询所有语料
+    List<CorpusDto> selectCorpus();
+
     //使用前端传递的语料段查询语料
     List<CorpusDto> chAndEn(String text);
 

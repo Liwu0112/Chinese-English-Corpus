@@ -16,10 +16,12 @@ import java.util.List;
 @Mapper
 public interface CorpusMapper extends BaseMapper<Corpus> {
 
+    //查询状态为1的语料信息
+    @Select("SELECT c.chinese_text, c.english_text, k.kind_name, t.type_name FROM t_corpus c LEFT JOIN t_type t ON c.type_id = t.type_id LEFT JOIN t_kind k ON c.kind_id = k.kind_id WHERE c.corpus_status='1'")
+    List<CorpusDto> reUserSelectCorpusAll();
     //使用前端传递的语料段查询语料
     @Select(" SELECT c.chinese_text, c.english_text, k.kind_name, t.type_name FROM t_corpus c LEFT JOIN t_type t ON c.type_id = t.type_id LEFT JOIN t_kind k ON c.kind_id = k.kind_id WHERE c.chinese_text LIKE #{text} or c.english_text like #{text} and c.corpus_status='1'")
     List<CorpusDto> selectChinesAndEnglish(@Param("text") String text);
-
     //普通用户分类查询
     @Select(" SELECT c.chinese_text, c.english_text, k.kind_name, t.type_name FROM t_corpus c JOIN t_kind k ON c.kind_id = k.kind_id JOIN t_type t ON c.type_id = t.type_id WHERE c.kind_id =#{kindId} AND c.type_id =#{typeId} and c.corpus_status='1'")
     List<CorpusDto> typeSelect(@Param("kindId") Integer kindId,@Param("typeId") Integer typeId);
@@ -58,8 +60,8 @@ public interface CorpusMapper extends BaseMapper<Corpus> {
     @Select("select corpus_id from t_corpus where chinese_text=#{chineseText} and english_text=#{englishText}")
     int selectCorpusIdByChAndEn(@Param("chineseText")String chineseText,@Param("englishText")String englishText);
     //查询当前条件为中文文本和英文文本，返回为当前中文文本和英文文本在数据库中的总数
-    @Select("select count(1) from t_corpus where chinese_text=#{chineseText} and english_text=#{englishText}")
-    int selectCountByChAndEn(@Param("chineseText")String chineseText,@Param("englishText")String englishText);
+    @Select("select count(1) from t_corpus where chinese_text=#{chineseText} and english_text=#{englishText} and type_id=#{typeId} and kind_id=#{kindId}")
+    int selectCountByChAndEn(@Param("chineseText")String chineseText,@Param("englishText")String englishText,@Param("typeId")Integer typeId,@Param("kindId")Integer kindId);
     //新增语料
     @Insert("insert into t_corpus ( `chinese_text`, `english_text`, `kind_id`, `type_id`, `corpus_status`, `creator`) values (#{chinseText},#{englishText},#{kindId},#{typeId},#{corpusStatus},#{creator})")
     int adminInsertCorpus(@Param("chinseText")String chineseText,@Param("englishText")String englishText,@Param("kindId")Integer kindId,@Param("typeId")Integer typeId,@Param("corpusStatus") Object corpusStatus,@Param("creator")String creator);

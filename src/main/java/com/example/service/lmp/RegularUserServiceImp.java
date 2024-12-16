@@ -52,6 +52,11 @@ public class RegularUserServiceImp implements RegularUserService {
             return 0; //不为空，返回0
         }
     }
+    //查询所有语料
+    @Override
+    public List<CorpusDto> selectCorpus() {
+        return corpusMapper.reUserSelectCorpusAll();
+    }
 
     //使用前端传递的语料段查询语料
     @Override
@@ -77,7 +82,7 @@ public class RegularUserServiceImp implements RegularUserService {
     @Override
     public List<CorpusDto> selectTypeCorpus(String kindName, String typeName) {
         Integer kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
-        Integer typeId = typeMapper.selectTypeIdInteger(typeName);
+        Integer typeId = typeMapper.selectTypeIdInteger(typeName,kindId);
         return corpusMapper.typeSelect(kindId,typeId);
     }
 

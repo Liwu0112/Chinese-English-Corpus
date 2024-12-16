@@ -20,12 +20,15 @@ public interface TypeMapper extends BaseMapper<Type> {
     //使用kind_id查询其所有的分类名
     @Select("select type_name from t_type where kind_id=#{kindId}")
     List<SelectTypeNames> selectTypeNamesByKId(@Param("kindId")Integer kindId);
+
     //使用type_name查询type_id
-    @Select("select type_id from t_type where type_name=#{typeName}")
-    Integer selectTypeIdInteger(@Param("typeName")String typeName);
+    @Select("select type_id from t_type where type_name=#{typeName} AND kind_id=#{kindId}")
+    Integer selectTypeIdInteger(@Param("typeName")String typeName,@Param("kindId")Integer kindId);
+
     //查看分类总数（t_type)
     @Select("select count(1) from t_type")
     Integer countType();
+    
     //管理员查看所有分类（分类编号，种类名，分类名）
     @Select("SELECT t_type.type_id ,t_kind.kind_name, t_type.type_name FROM t_type LEFT JOIN  t_kind ON t_type.kind_id = t_kind.kind_id")
     List<AdminOperateType> typeList();
