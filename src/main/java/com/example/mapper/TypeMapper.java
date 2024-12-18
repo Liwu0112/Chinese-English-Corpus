@@ -28,7 +28,7 @@ public interface TypeMapper extends BaseMapper<Type> {
     //查看分类总数（t_type)
     @Select("select count(1) from t_type")
     Integer countType();
-    
+
     //管理员查看所有分类（分类编号，种类名，分类名）
     @Select("SELECT t_type.type_id ,t_kind.kind_name, t_type.type_name FROM t_type LEFT JOIN  t_kind ON t_type.kind_id = t_kind.kind_id")
     List<AdminOperateType> typeList();
@@ -42,8 +42,8 @@ public interface TypeMapper extends BaseMapper<Type> {
     @Insert("insert into t_type (`kind_id`,`type_name`) values (#{kindId},#{typeName})")
     int insertType(@Param("kindId")Integer kindId,@Param("typeName")String typeName);
     //查看分类是否存在
-    @Select("select count(1) from t_type where type_name = #{typeName}")
-    int selectTypeByTypeName(@Param("typeName")String typeName);
+    @Select("select count(1) from t_type where type_name = #{typeName} and kind_id=#{kindId}")
+    int selectTypeByTypeName(@Param("typeName")String typeName,@Param("kindId")Integer kindId);
     //使用使用typeId查询分类编号，种类名，分类名
     @Select("SELECT t_kind.kind_name, t_type.type_name FROM t_type LEFT JOIN  t_kind ON t_type.kind_id = t_kind.kind_id where type_id=#{typeId}")
     AdminInsertTypeDto typeListByTypeId(@Param("typeId")Integer typeId);

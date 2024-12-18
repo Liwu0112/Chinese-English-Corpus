@@ -48,6 +48,16 @@ public class AdministratorServiceImp implements AdministratorService {
         return corpusMapper.selectAllCorpusCount();
     }
 
+    @Override
+    public int selectAllOnlineCount() {
+        return corpusMapper.countCorpusStatusOne();
+    }
+
+    @Override
+    public int slectAllOfflineCount() {
+        return corpusMapper.countCorpusStatusOneOffLine();
+    }
+
     //查看种类总数
     @Override
     public int selectAllKindCount() {
@@ -276,7 +286,7 @@ public class AdministratorServiceImp implements AdministratorService {
     @Override
     public int updateType(Integer typeId, String kindName, String typeName) {
         int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
-        int count = typeMapper.selectTypeByTypeName(typeName);
+        int count = typeMapper.selectTypeByTypeName(typeName,kindId);
         AdminInsertTypeDto adminInsertTypeDto = typeMapper.typeListByTypeId(typeId);
         String dbKindName = adminInsertTypeDto.getKindName();
         String dbTYpeName = adminInsertTypeDto.getTypeName();
@@ -301,7 +311,7 @@ public class AdministratorServiceImp implements AdministratorService {
     @Override
     public int insertType(String kindName, String typeName) {
         int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
-        int count = typeMapper.selectTypeByTypeName(typeName);
+        int count = typeMapper.selectTypeByTypeName(typeName,kindId);
         if (count == 0) {
             return typeMapper.insertType(kindId, typeName);
         }

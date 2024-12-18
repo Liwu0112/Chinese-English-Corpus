@@ -33,7 +33,19 @@ public class AdministratorController extends BaseApiService {
         int result = administratorService.selectAllCorpusCount();
         return setResultSuccessData(result);
     }
+    //查看上线总数
+    @GetMapping("/selectallonlinecount")
+    public BaseResponse adminSelectAllOnlinecount(){
+        int result = administratorService.selectAllOnlineCount();
+        return setResultSuccessData(result);
+    }
 
+    //查看下线总数
+    @GetMapping("/selectallofflinecount")
+    public BaseResponse adminSelectAllOfflineCount(){
+        int result = administratorService.slectAllOfflineCount();
+        return setResultSuccessData(result);
+    }
     //查看种类总数
     @GetMapping("/selectallkindcount")
     public BaseResponse adminSelectAllKinds() {

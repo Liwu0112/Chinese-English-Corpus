@@ -29,6 +29,9 @@ public interface CorpusMapper extends BaseMapper<Corpus> {
     //查看库中所有状态为上线(corpus_status=1)的语料总数
     @Select("select count(1) from t_corpus where corpus_status='1'")
     Integer countCorpusStatusOne();
+    //查看库中所有状态为下线(corpus_status=0)的语料总数
+    @Select("select count(1) from t_corpus where corpus_status='0'")
+    Integer countCorpusStatusOneOffLine();
 
     //查看库中种类所属的语料上线数(corpus_status=1)
     @Select("select count(1) from t_corpus where kind_id=#{kind_id} and corpus_status='1'")

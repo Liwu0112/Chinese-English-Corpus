@@ -17,6 +17,10 @@ public interface AdministratorService {
 
     //管理员查看语料总数
     int selectAllCorpusCount();
+    //查看上线语料总数
+    int selectAllOnlineCount();
+    //查看下线总数
+    int slectAllOfflineCount();
     //查看种类总数
     int selectAllKindCount();
     //查看分类总数
