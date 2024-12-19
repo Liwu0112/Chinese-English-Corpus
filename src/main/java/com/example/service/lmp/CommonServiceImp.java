@@ -46,16 +46,17 @@ public class CommonServiceImp implements CommonService {
 
     //修改密码
     @Override
-    public int updateUserPassword(String userName, String userNewPassword) {
+    public int updateUserPassword(String userName, String userOldPassword,String userNewPassword) {
         MD5Utils md5Utils =new MD5Utils();
-        String md5Password = md5Utils.md5(userNewPassword); //将用户旧密码加密
+        String md5OldPassword  = md5Utils.md5(userOldPassword);
+        String md5Password = md5Utils.md5(userNewPassword); //将用户密码加密
         String dbPassword = userMapper.selectUserPassword(userName); //查找用户在数据库中密码
-        if (!Objects.equals(md5Password, dbPassword)){
-            return userMapper.updateUserPassword(userName,md5Password);
+        if (Objects.equals(md5OldPassword,dbPassword)) { //判断旧密码是否输入正确
+            if (!Objects.equals(md5Password, dbPassword)) { //判断新旧密码是否相同
+                return userMapper.updateUserPassword(userName, md5Password);
+            }
         }
-        else {
-            return 0;
-        }
+        return 0;
     }
 
     //拦截器

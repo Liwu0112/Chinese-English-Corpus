@@ -17,7 +17,7 @@ public interface CommonService {
     int updateUserName(String userName,String userNewName);
 
     //修改用户密码
-    int updateUserPassword(String userName,String userNewPassword);
+    int updateUserPassword(String userName,String userOldPassword,String userNewPassword);
 
     //拦截器实现
     boolean userInter(String userName);

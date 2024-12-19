@@ -67,8 +67,9 @@ public class CommonController extends BaseApiService {
     @PostMapping("/updatepassword")
     public BaseResponse userUpdatePassword(@RequestBody UpdateUserPasswordDto updateUserPasswordDto,HttpServletResponse response){
         String userName = updateUserPasswordDto.getUserName();
+        String userOldPassword = updateUserPasswordDto.getUserOldPassword();
         String userNewPassword = updateUserPasswordDto.getUserNewPassword();
-        int a = commonService.updateUserPassword(userName,userNewPassword);
+        int a = commonService.updateUserPassword(userName,userOldPassword,userNewPassword);
         if (a!=0){
             cookieInterceptor.deleteCookie(response,"cookieName");
             return setResultSuccess();

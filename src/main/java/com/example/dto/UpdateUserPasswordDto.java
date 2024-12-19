@@ -12,5 +12,6 @@ import lombok.Data;
 @Data
 public class UpdateUserPasswordDto {
     private String userName;  //用户名
+    private String userOldPassword; //用户旧密码
     private String userNewPassword; //用户新密码
 }
