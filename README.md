@@ -890,3 +890,103 @@
 }
 ```
 
+#### 查看所有普通用户信息（编号，账户，注册时间，类型）
+
+请求方式：GET
+
+请求地址：/admin/selectallreuserinfo
+
+返回数据为数据库中所有普通用户的编号，账户，注册时间，类型
+
+####  将普通用户设置为管理员
+
+请求方式：POST
+
+请求地址：/amin/updateuserrole
+
+请求参数：
+
+```json
+{
+"userId":"10"
+}
+```
+
+响应成功参数：
+
+```json
+{
+  "code": 200,
+  "msg": "ok",
+  "data": null
+}
+```
+
+#### 重置密码
+
+请求方式：POST
+
+请求地址：/admin/resetpassword
+
+请求参数：
+
+```json
+{
+"userId":"10"
+}
+```
+
+返回成功参数：
+
+```json
+{
+  "code": 200,
+  "msg": "ok",
+  "data": null
+}
+```
+
+响应失败参数：
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
+}
+```
+
+#### 删除普通用户
+
+请求方式：POST
+
+请求地址：/admin/deleteuser
+
+请求参数：
+
+```json
+{
+"userId":"10"
+}
+```
+
+返回成功参数：
+
+```json
+{
+  "code": 200,
+  "msg": "ok",
+  "data": null
+}
+```
+
+响应失败参数：
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
+}
+```
+
