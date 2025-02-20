@@ -22,11 +22,11 @@ public interface RegularUserService {
     //使用前端传递的语料段查询语料
     List<CorpusDto> chAndEn(String text);
 
-    //查询所有种类名
-    List<SelectAllKindName> selectKindName();
-
-    //通过种类名产看种类名下的所有分类
-    List<SelectTypeNames> selectTypeNames(String kindName);
+//    //查询所有种类名
+//    List<SelectAllKindName> selectKindName();
+//
+//    //通过种类名产看种类名下的所有分类
+//    List<SelectTypeNames> selectTypeNames(String kindName);
 
     //分类查询语料
     List<CorpusDto> selectTypeCorpus(String kindName,String typeName);

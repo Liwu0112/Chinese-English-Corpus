@@ -1,8 +1,6 @@
 package com.example.controller;
 
-import com.example.dto.LoginDto;
-import com.example.dto.UpdateUserNameDto;
-import com.example.dto.UpdateUserPasswordDto;
+import com.example.dto.*;
 import com.example.entity.User;
 import com.example.service.CommonService;
 import com.example.utils.CookieInterceptor;
@@ -12,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 /**
  * @author liwu
  * @version 1.0
@@ -47,6 +47,19 @@ public class CommonController extends BaseApiService {
         }
     }
 
+    //查看所有种类名
+    @GetMapping("/selectallkind")
+    public BaseResponse adminSelectAllKind() {
+        List<SelectAllKindName> list = commonService.selectAllKindName();
+        return setResultSuccessData(list);
+    }
+
+    //用种类名查看其所有分类名
+    @GetMapping("/selectalltype")
+    public BaseResponse adminSelectAllType(@RequestParam("kindName") String kindName) {
+        List<SelectTypeNames> result = commonService.selectAllType(kindName);
+        return setResultSuccessData(result);
+    }
     //修改用户名
     @PostMapping("/updateusername")
     public BaseResponse userUpdateName(@RequestBody UpdateUserNameDto updateUserNameDto,HttpServletResponse response) {

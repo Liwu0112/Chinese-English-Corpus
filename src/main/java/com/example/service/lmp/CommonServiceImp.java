@@ -1,12 +1,18 @@
 package com.example.service.lmp;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.dto.SelectAllKindName;
+import com.example.dto.SelectTypeNames;
 import com.example.entity.User;
+import com.example.mapper.KindMapper;
+import com.example.mapper.TypeMapper;
 import com.example.mapper.UserMapper;
 import com.example.service.CommonService;
 import com.example.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -19,7 +25,10 @@ import java.util.Objects;
 public class CommonServiceImp implements CommonService {
     @Autowired
     private UserMapper userMapper;
-
+    @Autowired
+    private KindMapper kindMapper;
+    @Autowired
+    private TypeMapper typeMapper;
     //用户登录
     @Override
     public User userLogin(String userName, String passWord) {
@@ -59,6 +68,18 @@ public class CommonServiceImp implements CommonService {
         return 0;
     }
 
+    //查看所有种类名
+    @Override
+    public List<SelectAllKindName> selectAllKindName() {
+        return kindMapper.selectAllKindName();
+    }
+
+    //查看所有分类名
+    @Override
+    public List<SelectTypeNames> selectAllType(String kindName) {
+        int id = kindMapper.selectKindIdByKindNameInteger(kindName);
+        return typeMapper.selectTypeNamesByKId(id);
+    }
     //拦截器
     @Override
     public boolean userInter(String userName) {

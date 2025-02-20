@@ -1,5 +1,5 @@
 # 中英文语料库系统
-
+## 此仓库为后端代码库，前端代码库为Chinese-English-Corpus-Front
 ## 项目背景
 
 本课题旨在设计与开发一个基于Web的中英文语料库系统，以支持语言学研究、翻译实践和自然语言处理技术的发展。该系统将实现中英文语料的高效收集、存储、管理和分析，提供用户友好的界面和强大的查询功能。课题的核心研究内容包括系统架构设计、语料采集与处理、以及多维度语料分析工具的开发。通过该系统，研究人员能够便捷地访问和分析大规模双语文本数据，从而深化对语言特性和交流模式的理解，推动语言技术和人工智能领域的研究与应用。该课题不仅具有学术研究价值，也对促进跨文化交流和国际合作具有重要意义。
@@ -187,6 +187,80 @@
 }
 ```
 
+#### 查看所有种类名
+
+请求方式：GET
+
+请求地址：/admin/selectallkind
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": [
+        {
+            "kindName": "通则"
+        },
+        {
+            "kindName": "交通"
+        },
+        {
+            "kindName": "旅游"
+        },
+        {
+            "kindName": "文化娱乐"
+        },
+        {
+            "kindName": "体育"
+        },
+        {
+            "kindName": "教育"
+        },
+        {
+            "kindName": "医疗卫生"
+        },
+        {
+            "kindName": "邮政电信"
+        },
+        {
+            "kindName": "餐饮住宿"
+        },
+        {
+            "kindName": "商业金融"
+        }
+    ]
+}
+```
+
+#### 用种类名查看其所有分类名
+
+请求方式：GET
+
+请求地址：/admin/selectalltype
+
+请求参数：/admin/selectalltype?kindName=
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": [
+        {
+            "typeName": "安全保卫、消防类"
+        },
+        {
+            "typeName": "医疗急救类"
+        }
+    ]
+}
+```
+
+
+
 ### 普通用户控制类
 
 #### 普通用户注册
@@ -256,75 +330,6 @@
     "code": 500,
     "msg": "fail",
     "data": null
-}
-```
-
-#### 查看所有种类名
-
-请求方式：POST
-
-请求地址：/regularuser/selectallkindname
-
-响应成功参数：
-
-```json
-{
-    "code": 200,
-    "msg": "ok",
-    "data": [
-        {
-            "kindName": "通则"
-        },
-        {
-            "kindName": "交通"
-        },
-        {
-            "kindName": "旅游"
-        },
-        {
-            "kindName": "文化娱乐"
-        },
-        {
-            "kindName": "体育"
-        },
-        {
-            "kindName": "教育"
-        },
-        {
-            "kindName": "医疗卫生"
-        },
-        {
-            "kindName": "邮政电信"
-        },
-        {
-            "kindName": "餐饮住宿"
-        },
-        {
-            "kindName": "商业金融"
-        }
-    ]
-}
-```
-
-#### 通过种类名查看种类下所有分类
-
-请求方式：POST
-
-请求地址：/regularuser/selecttnbykn
-
-请求参数：/regularuser/selecttnbykn?kindName=
-
-响应成功参数：
-
-```json
-{
-    "code": 200,
-    "msg": "ok",
-    "data": [
-        {
-            "typeName": "安全保卫、消防类"
-        }
-    ]
 }
 ```
 
@@ -633,78 +638,6 @@
     "code": 500,
     "msg": "fail",
     "data": null
-}
-```
-
-#### 查看所有种类名
-
-请求方式：GET
-
-请求地址：/admin/selectallkind
-
-响应成功参数：
-
-```json
-{
-    "code": 200,
-    "msg": "ok",
-    "data": [
-        {
-            "kindName": "通则"
-        },
-        {
-            "kindName": "交通"
-        },
-        {
-            "kindName": "旅游"
-        },
-        {
-            "kindName": "文化娱乐"
-        },
-        {
-            "kindName": "体育"
-        },
-        {
-            "kindName": "教育"
-        },
-        {
-            "kindName": "医疗卫生"
-        },
-        {
-            "kindName": "邮政电信"
-        },
-        {
-            "kindName": "餐饮住宿"
-        },
-        {
-            "kindName": "商业金融"
-        }
-    ]
-}
-```
-
-#### 用种类名查看其所有分类名
-
-请求方式：GET
-
-请求地址：/admin/selectalltype
-
-请求参数：/admin/selectalltype?kindName=
-
-响应成功参数：
-
-```json
-{
-    "code": 200,
-    "msg": "ok",
-    "data": [
-        {
-            "typeName": "安全保卫、消防类"
-        },
-        {
-            "typeName": "医疗急救类"
-        }
-    ]
 }
 ```
 

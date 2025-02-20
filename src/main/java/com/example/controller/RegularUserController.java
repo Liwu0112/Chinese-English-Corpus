@@ -1,13 +1,10 @@
 package com.example.controller;
-
 import com.example.dto.*;
 import com.example.service.RegularUserService;
 import com.example.utils.api.BaseApiService;
 import com.example.utils.api.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.ClientInfoStatus;
 import java.util.List;
 
 /**
@@ -55,19 +52,19 @@ public class RegularUserController extends BaseApiService {
         }
     }
 
-    //查看所有种类名
-    @GetMapping("/selectallkindname")
-    public BaseResponse reUserSelectAllKinds() {
-        List<SelectAllKindName> list = regularUserService.selectKindName();
-        return setResultSuccessData(list);
-    }
-
-    //通过种类名产看种类名下的所有分类
-    @PostMapping("/selecttnbykn")
-    public BaseResponse reUserSelectTnByKn(@RequestParam("kindName") String kindName) {
-        List<SelectTypeNames> list = regularUserService.selectTypeNames(kindName);
-        return setResultSuccessData(list);
-    }
+//    //查看所有种类名
+//    @GetMapping("/selectallkindname")
+//    public BaseResponse reUserSelectAllKinds() {
+//        List<SelectAllKindName> list = regularUserService.selectKindName();
+//        return setResultSuccessData(list);
+//    }
+//
+//    //通过种类名产看种类名下的所有分类
+//    @PostMapping("/selecttnbykn")
+//    public BaseResponse reUserSelectTnByKn(@RequestParam("kindName") String kindName) {
+//        List<SelectTypeNames> list = regularUserService.selectTypeNames(kindName);
+//        return setResultSuccessData(list);
+//    }
 
     //查看分类下的所有语料
     @PostMapping("/selecttypecorpus")

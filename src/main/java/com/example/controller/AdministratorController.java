@@ -95,19 +95,19 @@ public class AdministratorController extends BaseApiService {
         return setResultSuccessData(list);
     }
 
-    //查看所有种类名
-    @GetMapping("/selectallkind")
-    public BaseResponse adminSelectAllKind() {
-        List<SelectAllKindName> list = administratorService.selectAllKindName();
-        return setResultSuccessData(list);
-    }
-
-    //用种类名查看其所有分类名
-    @GetMapping("/selectalltype")
-    public BaseResponse adminSelectAllType(@RequestParam("kindName") String kindName) {
-        List<SelectTypeNames> result = administratorService.selectAllType(kindName);
-        return setResultSuccessData(result);
-    }
+//    //查看所有种类名
+//    @GetMapping("/selectallkind")
+//    public BaseResponse adminSelectAllKind() {
+//        List<SelectAllKindName> list = administratorService.selectAllKindName();
+//        return setResultSuccessData(list);
+//    }
+//
+//    //用种类名查看其所有分类名
+//    @GetMapping("/selectalltype")
+//    public BaseResponse adminSelectAllType(@RequestParam("kindName") String kindName) {
+//        List<SelectTypeNames> result = administratorService.selectAllType(kindName);
+//        return setResultSuccessData(result);
+//    }
 
     //修改语料
     @PostMapping("/updatecorpus")

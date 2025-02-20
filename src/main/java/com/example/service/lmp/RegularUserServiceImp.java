@@ -65,18 +65,18 @@ public class RegularUserServiceImp implements RegularUserService {
         return corpusMapper.selectChinesAndEnglish(likeText);  //返回对应数据
     }
 
-    //查询所有种类（kind）名
-    @Override
-    public List<SelectAllKindName> selectKindName(){
-        return kindMapper.selectAllKindName();
-    }
-
-    //通过种类名产看种类名下的所有分类
-    @Override
-    public List<SelectTypeNames>  selectTypeNames(String kindName){
-        Integer kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
-        return typeMapper.selectTypeNamesByKId(kindId);
-    }
+//    //查询所有种类（kind）名
+//    @Override
+//    public List<SelectAllKindName> selectKindName(){
+//        return kindMapper.selectAllKindName();
+//    }
+//
+//    //通过种类名产看种类名下的所有分类
+//    @Override
+//    public List<SelectTypeNames>  selectTypeNames(String kindName){
+//        Integer kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+//        return typeMapper.selectTypeNamesByKId(kindId);
+//    }
 
     //分类查询
     @Override

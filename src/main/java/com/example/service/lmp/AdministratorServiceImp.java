@@ -103,18 +103,18 @@ public class AdministratorServiceImp implements AdministratorService {
         return corpusMapper.selectAllCorpus();
     }
 
-    //查看所有种类名
-    @Override
-    public List<SelectAllKindName> selectAllKindName() {
-        return kindMapper.selectAllKindName();
-    }
-
-    //查看所有分类名
-    @Override
-    public List<SelectTypeNames> selectAllType(String kindName) {
-        int id = kindMapper.selectKindIdByKindNameInteger(kindName);
-        return typeMapper.selectTypeNamesByKId(id);
-    }
+//    //查看所有种类名
+//    @Override
+//    public List<SelectAllKindName> selectAllKindName() {
+//        return kindMapper.selectAllKindName();
+//    }
+//
+//    //查看所有分类名
+//    @Override
+//    public List<SelectTypeNames> selectAllType(String kindName) {
+//        int id = kindMapper.selectKindIdByKindNameInteger(kindName);
+//        return typeMapper.selectTypeNamesByKId(id);
+//    }
 
     //修改语料
     @Override

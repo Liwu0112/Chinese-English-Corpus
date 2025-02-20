@@ -4,10 +4,7 @@ import com.example.dto.AdminSelectAllCorpusDto;
 import com.example.dto.CorpusDto;
 import com.example.entity.Corpus;
 import org.apache.ibatis.annotations.*;
-
 import java.util.List;
-
-
 /**
 * @author Xiao-Li
 * @description 针对表【t_corpus】的数据库操作Mapper
@@ -25,19 +22,15 @@ public interface CorpusMapper extends BaseMapper<Corpus> {
     //普通用户分类查询
     @Select(" SELECT c.chinese_text, c.english_text, k.kind_name, t.type_name FROM t_corpus c JOIN t_kind k ON c.kind_id = k.kind_id JOIN t_type t ON c.type_id = t.type_id WHERE c.kind_id =#{kindId} AND c.type_id =#{typeId} and c.corpus_status='1'")
     List<CorpusDto> typeSelect(@Param("kindId") Integer kindId,@Param("typeId") Integer typeId);
-
     //查看库中所有状态为上线(corpus_status=1)的语料总数
     @Select("select count(1) from t_corpus where corpus_status='1'")
     Integer countCorpusStatusOne();
     //查看库中所有状态为下线(corpus_status=0)的语料总数
     @Select("select count(1) from t_corpus where corpus_status='0'")
     Integer countCorpusStatusOneOffLine();
-
     //查看库中种类所属的语料上线数(corpus_status=1)
     @Select("select count(1) from t_corpus where kind_id=#{kind_id} and corpus_status='1'")
     Integer kindCountCors(@Param("kind_id")Integer kindId);
-
-
     //查询语料总数
     @Select("select count(1) from t_corpus")
     int selectAllCorpusCount();
@@ -71,6 +64,7 @@ public interface CorpusMapper extends BaseMapper<Corpus> {
     //查看当前分类下是否还有语料
     @Select("select count(1) from t_corpus where type_id=#{typeId}")
     int selectCountByTypeId(@Param("typeId")Integer typeId);
+
     //修改语料种类Id
     @Update("update t_corpus set kind_id=#{kindId} where type_id=#{typeId}")
     int updateCorpusKindId(@Param("kindId")Integer kindId,@Param("typeId")Integer typeId);
