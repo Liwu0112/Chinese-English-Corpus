@@ -81,32 +81,32 @@ public class RegularUserController extends BaseApiService {
         }
     }
 
-    //查看库中所有状态为上线(corpus_status=1)的语料总数
-    @GetMapping("/reselectcountcorpus")
-    public BaseResponse reSelectCountCorpus(){
-        int result = regularUserService.selectCountCorpusone();
-        return setResultSuccessData(result);
-    }
+//    //查看库中所有状态为上线(corpus_status=1)的语料总数
+//    @GetMapping("/reselectcountcorpus")
+//    public BaseResponse reSelectCountCorpus(){
+//        int result = regularUserService.selectCountCorpusone();
+//        return setResultSuccessData(result);
+//    }
 
 
-    //查看种类总数（t_kind)
-    @GetMapping("/reselectcountkind")
-    public BaseResponse reSelectCountKind(){
-        int result = regularUserService.selectCountKind();
-        return setResultSuccessData(result);
-    }
+//    //查看种类总数（t_kind)
+//    @GetMapping("/reselectcountkind")
+//    public BaseResponse reSelectCountKind(){
+//        int result = regularUserService.selectCountKind();
+//        return setResultSuccessData(result);
+//    }
+//
+//    //查看分类总数（t_type)
+//    @GetMapping("/reselectcounttype")
+//    public BaseResponse reSelectCountType(){
+//        int result = regularUserService.selectCountType();
+//        return setResultSuccessData(result);
+//    }
 
-    //查看分类总数（t_type)
-    @GetMapping("/reselectcounttype")
-    public BaseResponse reSelectCountType(){
-        int result = regularUserService.selectCountType();
-        return setResultSuccessData(result);
-    }
-
-    //查看库中种类所属的语料总数且状态为上线(corpus_status=1)
-    @GetMapping("/rescorpusbykindname")
-    public  BaseResponse resCorpusByKindName(@RequestParam("kindName") String kindName){
-        int result = regularUserService.kindToCorpus(kindName);
-        return setResultSuccessData(result);
-    }
+//    //查看库中种类所属的语料总数且状态为上线(corpus_status=1)
+//    @GetMapping("/rescorpusbykindname")
+//    public  BaseResponse resCorpusByKindName(@RequestParam("kindName") String kindName){
+//        int result = regularUserService.kindToCorpus(kindName);
+//        return setResultSuccessData(result);
+//    }
 }

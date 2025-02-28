@@ -29,5 +29,13 @@ public interface CommonService {
     List<SelectTypeNames> selectAllType(String kindName);
     //拦截器实现
     boolean userInter(String userName);
+    //查看种类总数
+    int selectAllKindCount();
+    //查看分类总数
+    int selectAllTypeCount();
+    //查看上线语料总数
+    int selectAllOnlineCount();
+    //查看种类下语料上线数
+    int selectKindOnlineCorCount(String kindName);
 
 }

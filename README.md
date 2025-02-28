@@ -190,11 +190,43 @@
 }
 ```
 
+#### 查看种类总数
+
+请求方式：GET
+
+请求地址：/common/selectallkindcount
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 10
+}
+```
+
+#### 查看分类总数
+
+请求方式：GET
+
+请求地址：/common/selectalltypecount
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 11
+}
+```
+
 #### 查看所有种类名
 
 请求方式：GET
 
-请求地址：/admin/selectallkind
+请求地址：/common/selectallkind
 
 响应成功参数：
 
@@ -241,9 +273,9 @@
 
 请求方式：GET
 
-请求地址：/admin/selectalltype
+请求地址：/common/selectalltype
 
-请求参数：/admin/selectalltype?kindName=
+请求参数：/common/selectalltype?kindName=
 
 响应成功参数：
 
@@ -262,7 +294,39 @@
 }
 ```
 
+#### 按种类名查询语料上线数
 
+请求方式：GET
+
+请求地址：/common/selectonlinebykindname
+
+请求参数：/common/selectonlinebykindname?kindName=
+
+响应成功参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 12
+}
+```
+
+#### 查看库中所有状态为上线（corpus_status=1)的语料总数
+
+请求方式：GET
+
+请求地址：/common/selectallonlinecount
+
+返回参数：
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": 14
+}
+```
 
 ### 普通用户控制类
 
@@ -384,61 +448,11 @@
 }
 ```
 
-#### 查看库中所有状态为上线（corpus_status=1)的语料总数
+#### 查询所有上线语料
 
 请求方式：GET
 
-请求地址：/regularuser/reselectcountcorpus
-
-返回参数：
-
-```json
-{
-    "code": 200,
-    "msg": "ok",
-    "data": 14
-}
-```
-
-#### 查看种类总数
-
-请求方式：GET
-
-请求地址：/regularuser/reselectcountkind
-
-返回参数：
-
-```json
-{
-    "code": 200,
-    "msg": "ok",
-    "data": 10
-}
-```
-
-#### 查看分类总数
-
-请求方式：GET
-
-请求地址：/regularuser/reselectcounttype
-
-返回参数：
-
-```json
-{
-    "code": 200,
-    "msg": "ok",
-    "data": 2
-}
-```
-
-#### 查看库中种类所属的语料总数且状态为上线(corpus_status=1)
-
-请求方式：GET
-
-请求地址：/regularuser/rescorpusbykindname
-
-请求参数：/regularuser/rescorpusbykindname?kindName=
+请求地址：/regularuser/selectallcorpus
 
 响应成功参数：
 
@@ -446,7 +460,26 @@
 {
     "code": 200,
     "msg": "ok",
-    "data": 13
+    "data": [
+        {
+            "corpusId": 1,
+            "chineseText": "保安室；门卫室;值班岗",
+            "englishText": "Security",
+            "kindName": "通则",
+            "typeName": "安全保卫、消防类",
+            "corpusStatus": "1",
+            "creator": "admin",
+            "creationTime": "2024-11-25T09:01:03.000+00:00"
+        }
+```
+
+响应失败参数：
+
+```json
+{
+    "code": 500,
+    "msg": "fail",
+    "data": null
 }
 ```
 
@@ -468,37 +501,7 @@
 }
 ```
 
-#### 查看种类总数
 
-请求方式：GET
-
-请求地址：/admin/selectallkindcount
-
-响应成功参数：
-
-```json
-{
-    "code": 200,
-    "msg": "ok",
-    "data": 10
-}
-```
-
-#### 查看分类总数
-
-请求方式：GET
-
-请求地址：/admin/selectalltypecount
-
-响应成功参数：
-
-```json
-{
-    "code": 200,
-    "msg": "ok",
-    "data": 11
-}
-```
 
 #### 查看种类下语料数
 
@@ -518,23 +521,7 @@
 }
 ```
 
-#### 按种类名查询语料上线数
 
-请求方式：GET
-
-请求地址：/admin/selectonlinebykindname
-
-请求参数：/admin/selectonlinebykindname?kindName=
-
-响应成功参数：
-
-```
-{
-    "code": 200,
-    "msg": "ok",
-    "data": 12
-}
-```
 
 #### 按种类名查询语料下线数
 
@@ -553,6 +540,8 @@
     "data": 1
 }
 ```
+
+
 
 #### 查看普通用户数量
 
@@ -604,6 +593,8 @@
     "data": null
 }
 ```
+
+
 
 #### 修改语料
 

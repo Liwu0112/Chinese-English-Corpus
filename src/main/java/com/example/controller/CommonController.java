@@ -97,4 +97,30 @@ public class CommonController extends BaseApiService {
         cookieInterceptor.deleteCookie(response,"cookieName");
         return setResultSuccess();
     }
+    //查看种类总数
+    @GetMapping("/selectallkindcount")
+    public BaseResponse adminSelectAllKinds() {
+        int result = commonService.selectAllKindCount();
+        return setResultSuccessData(result);
+    }
+
+    //查看分类总数
+    @GetMapping("/selectalltypecount")
+    public BaseResponse adminSelectAllTypes() {
+        int result = commonService.selectAllTypeCount();
+        return setResultSuccessData(result);
+    }
+        //查看上线总数
+    @GetMapping("/selectallonlinecount")
+    public BaseResponse adminSelectAllOnlinecount(){
+        int result = commonService.selectAllOnlineCount();
+        return setResultSuccessData(result);
+    }
+
+    //按种类名查询语料上线数
+    @GetMapping("/selectonlinebykindname")
+    public BaseResponse amdinSelectOnlineByKindName(@RequestParam("kindName") String kindName) {
+        int result = commonService.selectKindOnlineCorCount(kindName);
+        return setResultSuccessData(result);
+    }
 }

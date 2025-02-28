@@ -17,18 +17,18 @@ public interface AdministratorService {
 
     //管理员查看语料总数
     int selectAllCorpusCount();
-    //查看上线语料总数
-    int selectAllOnlineCount();
+//    //查看上线语料总数
+//    int selectAllOnlineCount();
     //查看下线总数
     int slectAllOfflineCount();
-    //查看种类总数
-    int selectAllKindCount();
-    //查看分类总数
-    int selectAllTypeCount();
+//    //查看种类总数
+//    int selectAllKindCount();
+//    //查看分类总数
+//    int selectAllTypeCount();
     //查看种类下语料数
     int selectKindCorsCount(String kindName);
-    //查看种类下语料上线数
-    int selectKindOnlineCorCount(String kindName);
+//    //查看种类下语料上线数
+//    int selectKindOnlineCorCount(String kindName);
     //查看种类下语料下线数
     int selectKindLineCorCount(String kindName);
     //查询普通用户总数
@@ -67,4 +67,5 @@ public interface AdministratorService {
     int resetPassword(Integer userId);
     //删除用户
     int deleteUser(Integer userId);
+
 }

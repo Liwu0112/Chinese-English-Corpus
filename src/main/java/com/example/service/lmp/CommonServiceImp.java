@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.dto.SelectAllKindName;
 import com.example.dto.SelectTypeNames;
 import com.example.entity.User;
+import com.example.mapper.CorpusMapper;
 import com.example.mapper.KindMapper;
 import com.example.mapper.TypeMapper;
 import com.example.mapper.UserMapper;
@@ -29,6 +30,8 @@ public class CommonServiceImp implements CommonService {
     private KindMapper kindMapper;
     @Autowired
     private TypeMapper typeMapper;
+    @Autowired
+    private CorpusMapper corpusMapper;
     //用户登录
     @Override
     public User userLogin(String userName, String passWord) {
@@ -87,6 +90,29 @@ public class CommonServiceImp implements CommonService {
         queryWrapper.eq("user_name",userName); //查找数据库中是否有该数据
         User user =userMapper.selectOne(queryWrapper);
         return user!=null;
+    }
+//    查看种类总数
+    @Override
+    public int selectAllKindCount() {
+        return kindMapper.countKind();
+    }
+
+    //查看分类总数
+    @Override
+    public int selectAllTypeCount() {
+        return typeMapper.countType();
+    }
+    //上线总数
+    @Override
+    public int selectAllOnlineCount() {
+        return corpusMapper.countCorpusStatusOne();
+    }
+
+    //查看种类下语料上线数
+    @Override
+    public int selectKindOnlineCorCount(String kindName) {
+        int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+        return corpusMapper.kindCountCors(kindId);
     }
 
 }

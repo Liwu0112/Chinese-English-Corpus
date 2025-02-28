@@ -48,27 +48,27 @@ public class AdministratorServiceImp implements AdministratorService {
         return corpusMapper.selectAllCorpusCount();
     }
 
-    @Override
-    public int selectAllOnlineCount() {
-        return corpusMapper.countCorpusStatusOne();
-    }
+//    @Override
+//    public int selectAllOnlineCount() {
+//        return corpusMapper.countCorpusStatusOne();
+//    }
 
     @Override
     public int slectAllOfflineCount() {
         return corpusMapper.countCorpusStatusOneOffLine();
     }
 
-    //查看种类总数
-    @Override
-    public int selectAllKindCount() {
-        return kindMapper.countKind();
-    }
-
-    //查看分类总数
-    @Override
-    public int selectAllTypeCount() {
-        return typeMapper.countType();
-    }
+//    //查看种类总数
+//    @Override
+//    public int selectAllKindCount() {
+//        return kindMapper.countKind();
+//    }
+//
+//    //查看分类总数
+//    @Override
+//    public int selectAllTypeCount() {
+//        return typeMapper.countType();
+//    }
 
     //查看种类下语料数
     @Override
@@ -77,12 +77,12 @@ public class AdministratorServiceImp implements AdministratorService {
         return corpusMapper.selectkindCor(kindId);
     }
 
-    //查看种类下语料上线数
-    @Override
-    public int selectKindOnlineCorCount(String kindName) {
-        int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
-        return corpusMapper.kindCountCors(kindId);
-    }
+//    //查看种类下语料上线数
+//    @Override
+//    public int selectKindOnlineCorCount(String kindName) {
+//        int kindId = kindMapper.selectKindIdByKindNameInteger(kindName);
+//        return corpusMapper.kindCountCors(kindId);
+//    }
 
     //查看种类下语料下线数
     @Override

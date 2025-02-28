@@ -33,12 +33,12 @@ public class AdministratorController extends BaseApiService {
         int result = administratorService.selectAllCorpusCount();
         return setResultSuccessData(result);
     }
-    //查看上线总数
-    @GetMapping("/selectallonlinecount")
-    public BaseResponse adminSelectAllOnlinecount(){
-        int result = administratorService.selectAllOnlineCount();
-        return setResultSuccessData(result);
-    }
+//    //查看上线总数
+//    @GetMapping("/selectallonlinecount")
+//    public BaseResponse adminSelectAllOnlinecount(){
+//        int result = administratorService.selectAllOnlineCount();
+//        return setResultSuccessData(result);
+//    }
 
     //查看下线总数
     @GetMapping("/selectallofflinecount")
@@ -46,19 +46,19 @@ public class AdministratorController extends BaseApiService {
         int result = administratorService.slectAllOfflineCount();
         return setResultSuccessData(result);
     }
-    //查看种类总数
-    @GetMapping("/selectallkindcount")
-    public BaseResponse adminSelectAllKinds() {
-        int result = administratorService.selectAllKindCount();
-        return setResultSuccessData(result);
-    }
-
-    //查看分类总数
-    @GetMapping("selectalltypecount")
-    public BaseResponse adminSelectAllTypes() {
-        int result = administratorService.selectAllTypeCount();
-        return setResultSuccessData(result);
-    }
+//    //查看种类总数
+//    @GetMapping("/selectallkindcount")
+//    public BaseResponse adminSelectAllKinds() {
+//        int result = administratorService.selectAllKindCount();
+//        return setResultSuccessData(result);
+//    }
+//
+//    //查看分类总数
+//    @GetMapping("selectalltypecount")
+//    public BaseResponse adminSelectAllTypes() {
+//        int result = administratorService.selectAllTypeCount();
+//        return setResultSuccessData(result);
+//    }
 
     //查看种类下语料数
     @GetMapping("/selectKindcors")
@@ -67,12 +67,12 @@ public class AdministratorController extends BaseApiService {
         return setResultSuccessData(result);
     }
 
-    //按种类名查询语料上线数
-    @GetMapping("selectonlinebykindname")
-    public BaseResponse amdinSelectOnlineByKindName(@RequestParam("kindName") String kindName) {
-        int result = administratorService.selectKindOnlineCorCount(kindName);
-        return setResultSuccessData(result);
-    }
+//    //按种类名查询语料上线数
+//    @GetMapping("selectonlinebykindname")
+//    public BaseResponse amdinSelectOnlineByKindName(@RequestParam("kindName") String kindName) {
+//        int result = administratorService.selectKindOnlineCorCount(kindName);
+//        return setResultSuccessData(result);
+//    }
 
     //按种类名查询下线数
     @GetMapping("selectofflinebykindname")
