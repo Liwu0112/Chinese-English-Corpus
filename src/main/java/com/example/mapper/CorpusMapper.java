@@ -68,6 +68,10 @@ public interface CorpusMapper extends BaseMapper<Corpus> {
     //修改语料种类Id
     @Update("update t_corpus set kind_id=#{kindId} where type_id=#{typeId}")
     int updateCorpusKindId(@Param("kindId")Integer kindId,@Param("typeId")Integer typeId);
+
+    //查询种类下上线的所有语料
+    @Select("SELECT c.chinese_text, c.english_text, k.kind_name, t.type_name FROM t_corpus c  LEFT JOIN t_type t ON c.type_id = t.type_id LEFT JOIN t_kind k ON c.kind_id = k.kind_id WHERE c.corpus_status='1' and k.kind_name=#{kindName}")
+    List<CorpusDto> reUserDownLoad(@Param("kindName")String kindName);
 }
 
 
