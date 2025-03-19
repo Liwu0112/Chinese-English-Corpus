@@ -18,10 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -153,6 +155,75 @@ public class AdministratorServiceImp implements AdministratorService {
     }
 
     //批量新增
+//    @Override
+//    public BaseResponse importCorpusFromExcel(MultipartFile file) {
+//        int threadCount = Runtime.getRuntime().availableProcessors(); // 根据 CPU 核心数动态调整线程数
+//        ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+//        List<Future<Integer>> results = new ArrayList<>();
+//
+//        try (InputStream inputStream = file.getInputStream()) {
+//            Workbook workbook;
+//            if (file.getOriginalFilename().endsWith(".xlsx")) {
+//                workbook = new XSSFWorkbook(inputStream);
+//            } else if (file.getOriginalFilename().endsWith(".xls")) {
+//                workbook = new HSSFWorkbook(inputStream);
+//            } else {
+//                return new BaseResponse(500, "不支持的文件格式", null);
+//            }
+//            Sheet sheet = workbook.getSheetAt(0);
+//            Iterator<Row> rowIterator = sheet.iterator();
+//            if (rowIterator.hasNext()) {
+//                rowIterator.next(); // 跳过表头
+//            }
+//            while (rowIterator.hasNext()) {
+//                Row row = rowIterator.next();
+//                Future<Integer> future = executor.submit(() -> processExcelRow(row));
+//                results.add(future);
+//            }
+//            executor.shutdown();
+//            boolean finished = executor.awaitTermination(600, TimeUnit.SECONDS);
+//            if (!finished) {
+//                executor.shutdownNow();
+//                return new BaseResponse(500, "导入超时", null);
+//            }
+//            int successCount = 0;
+//            int failCount = 0;
+//            for (Future<Integer> result : results) {
+//                try {
+//                    if (result.get() == 1) {
+//                        successCount++;
+//                    } else {
+//                        failCount++;
+//                    }
+//                } catch (Exception e) {
+//                    failCount++;
+//                }
+//            }
+//            return new BaseResponse(200, "导入完成, 成功: " + successCount + " 条, 失败: " + failCount + " 条", null);
+//        } catch (IOException | InterruptedException e) {
+//            Thread.currentThread().interrupt();
+//            return new BaseResponse(500, "导入失败", null);
+//        }
+//    }
+//
+//    /**
+//     * 处理 Excel 每一行数据，返回 1 表示成功，0 表示失败
+//     */
+//    private int processExcelRow(Row row) {
+//        String chineseText = getCellStringValue(row.getCell(0));
+//        String englishText = getCellStringValue(row.getCell(1));
+//        String kindName = getCellStringValue(row.getCell(2));
+//        String typeName = getCellStringValue(row.getCell(3));
+//        Object corpusStatus = row.getCell(4) != null ? row.getCell(4).getStringCellValue() : 0;
+//        String creator = getCellStringValue(row.getCell(5));
+//
+//        if (!chineseText.isEmpty() && !englishText.isEmpty() &&
+//                !kindName.isEmpty() && !typeName.isEmpty()) {
+//            return insertOneCorpus(chineseText, englishText, kindName, typeName, corpusStatus, creator);
+//        }
+//        return 0;
+//    }
+
     @Override
     public BaseResponse importCorpusFromExcel(MultipartFile file) {
         ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -246,7 +317,7 @@ public class AdministratorServiceImp implements AdministratorService {
             textStyle.setDataFormat(format.getFormat("@"));  // @ 表示文本格式
 
             Row headerRow = sheet.createRow(0);
-            String[] headers = {"中文文本", "英文文本", "种类", "分类", "状态", "创建者"};
+            String[] headers = {"中文文本", "英文文本", "种类(基础10大种类)", "分类(填写种类中包含的分类)", "状态(上线1，下线0)", "创建者"};
 
             for (int i = 0; i < headers.length; i++) {
                 sheet.setColumnWidth(i, 20 * 256);

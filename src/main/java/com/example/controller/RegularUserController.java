@@ -19,7 +19,6 @@ import java.util.Map;
  * @注释：普通用户控制类
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
 @ResponseBody
 @RequestMapping("/regularuser")
 public class RegularUserController extends BaseApiService {
